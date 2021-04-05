@@ -33,6 +33,14 @@
 		3274880C261A3030000E2559 /* Roboto-ThinItalic.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 327487FA261A3030000E2559 /* Roboto-ThinItalic.ttf */; };
 		3274880D261A3030000E2559 /* RobotoCondensed-BoldItalic.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 327487FB261A3030000E2559 /* RobotoCondensed-BoldItalic.ttf */; };
 		3274880E261A3030000E2559 /* RobotoCondensed-Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 327487FC261A3030000E2559 /* RobotoCondensed-Regular.ttf */; };
+		3274888E261B679F000E2559 /* ImageListScreenProtocols.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3274888D261B679F000E2559 /* ImageListScreenProtocols.swift */; };
+		32748894261B76E5000E2559 /* NetworkLayer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 32748893261B76E5000E2559 /* NetworkLayer.swift */; };
+		3274889A261B7903000E2559 /* APIResponseModels.swift in Sources */ = {isa = PBXBuildFile; fileRef = 32748899261B7903000E2559 /* APIResponseModels.swift */; };
+		327488A2261B918D000E2559 /* AppExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 327488A1261B918D000E2559 /* AppExtensions.swift */; };
+		327488A7261B9412000E2559 /* AppConfig.swift in Sources */ = {isa = PBXBuildFile; fileRef = 327488A6261B9412000E2559 /* AppConfig.swift */; };
+		327488AC261B9981000E2559 /* AppConfigTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 327488AB261B9981000E2559 /* AppConfigTests.swift */; };
+		327488B1261B9F31000E2559 /* NetworkLayerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 327488B0261B9F31000E2559 /* NetworkLayerTests.swift */; };
+		327488BF261BA68E000E2559 /* Utility.swift in Sources */ = {isa = PBXBuildFile; fileRef = 327488BE261BA68E000E2559 /* Utility.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -85,6 +93,14 @@
 		327487FA261A3030000E2559 /* Roboto-ThinItalic.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Roboto-ThinItalic.ttf"; sourceTree = "<group>"; };
 		327487FB261A3030000E2559 /* RobotoCondensed-BoldItalic.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "RobotoCondensed-BoldItalic.ttf"; sourceTree = "<group>"; };
 		327487FC261A3030000E2559 /* RobotoCondensed-Regular.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "RobotoCondensed-Regular.ttf"; sourceTree = "<group>"; };
+		3274888D261B679F000E2559 /* ImageListScreenProtocols.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageListScreenProtocols.swift; sourceTree = "<group>"; };
+		32748893261B76E5000E2559 /* NetworkLayer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkLayer.swift; sourceTree = "<group>"; };
+		32748899261B7903000E2559 /* APIResponseModels.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APIResponseModels.swift; sourceTree = "<group>"; };
+		327488A1261B918D000E2559 /* AppExtensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppExtensions.swift; sourceTree = "<group>"; };
+		327488A6261B9412000E2559 /* AppConfig.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppConfig.swift; sourceTree = "<group>"; };
+		327488AB261B9981000E2559 /* AppConfigTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppConfigTests.swift; sourceTree = "<group>"; };
+		327488B0261B9F31000E2559 /* NetworkLayerTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkLayerTests.swift; sourceTree = "<group>"; };
+		327488BE261BA68E000E2559 /* Utility.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Utility.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -135,6 +151,9 @@
 		327487B1261A208F000E2559 /* assignment */ = {
 			isa = PBXGroup;
 			children = (
+				32748898261B78F0000E2559 /* Entity */,
+				32748892261B76D3000E2559 /* Common */,
+				3274888B261B6739000E2559 /* Modules */,
 				327487E8261A2F17000E2559 /* Resources */,
 				327487B2261A208F000E2559 /* AppDelegate.swift */,
 				327487B4261A208F000E2559 /* SceneDelegate.swift */,
@@ -152,6 +171,9 @@
 			children = (
 				327487C9261A2091000E2559 /* assignmentTests.swift */,
 				327487CB261A2091000E2559 /* Info.plist */,
+				327488AB261B9981000E2559 /* AppConfigTests.swift */,
+				327488B0261B9F31000E2559 /* NetworkLayerTests.swift */,
+				327488BE261BA68E000E2559 /* Utility.swift */,
 			);
 			path = assignmentTests;
 			sourceTree = "<group>";
@@ -204,6 +226,40 @@
 				327487FC261A3030000E2559 /* RobotoCondensed-Regular.ttf */,
 			);
 			path = Roboto;
+			sourceTree = "<group>";
+		};
+		3274888B261B6739000E2559 /* Modules */ = {
+			isa = PBXGroup;
+			children = (
+				3274888C261B6741000E2559 /* ImageListScreen */,
+			);
+			path = Modules;
+			sourceTree = "<group>";
+		};
+		3274888C261B6741000E2559 /* ImageListScreen */ = {
+			isa = PBXGroup;
+			children = (
+				3274888D261B679F000E2559 /* ImageListScreenProtocols.swift */,
+			);
+			path = ImageListScreen;
+			sourceTree = "<group>";
+		};
+		32748892261B76D3000E2559 /* Common */ = {
+			isa = PBXGroup;
+			children = (
+				32748893261B76E5000E2559 /* NetworkLayer.swift */,
+				327488A1261B918D000E2559 /* AppExtensions.swift */,
+				327488A6261B9412000E2559 /* AppConfig.swift */,
+			);
+			path = Common;
+			sourceTree = "<group>";
+		};
+		32748898261B78F0000E2559 /* Entity */ = {
+			isa = PBXGroup;
+			children = (
+				32748899261B7903000E2559 /* APIResponseModels.swift */,
+			);
+			path = Entity;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -355,8 +411,13 @@
 			buildActionMask = 2147483647;
 			files = (
 				327487B7261A208F000E2559 /* ViewController.swift in Sources */,
+				327488A7261B9412000E2559 /* AppConfig.swift in Sources */,
 				327487B3261A208F000E2559 /* AppDelegate.swift in Sources */,
+				3274888E261B679F000E2559 /* ImageListScreenProtocols.swift in Sources */,
+				3274889A261B7903000E2559 /* APIResponseModels.swift in Sources */,
+				32748894261B76E5000E2559 /* NetworkLayer.swift in Sources */,
 				327487B5261A208F000E2559 /* SceneDelegate.swift in Sources */,
+				327488A2261B918D000E2559 /* AppExtensions.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -364,7 +425,10 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				327488BF261BA68E000E2559 /* Utility.swift in Sources */,
 				327487CA261A2091000E2559 /* assignmentTests.swift in Sources */,
+				327488AC261B9981000E2559 /* AppConfigTests.swift in Sources */,
+				327488B1261B9F31000E2559 /* NetworkLayerTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
