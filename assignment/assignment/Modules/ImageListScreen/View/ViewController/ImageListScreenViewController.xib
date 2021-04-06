@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="17701" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+    <device id="retina6_1" orientation="portrait" appearance="light"/>
+    <dependencies>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="17703"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="System colors in document resources" minToolsVersion="11.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="ImageListScreenViewController" customModule="assignment" customModuleProvider="target">
+            <connections>
+                <outlet property="imageCollectionView" destination="eO7-Zd-qvV" id="dSo-tO-pCO"/>
+                <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
+            </connections>
+        </placeholder>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <view clearsContextBeforeDrawing="NO" contentMode="scaleToFill" id="i5M-Pr-FkT">
+            <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+            <subviews>
+                <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="none" translatesAutoresizingMaskIntoConstraints="NO" id="eO7-Zd-qvV">
+                    <rect key="frame" x="20" y="89" width="374" height="763"/>
+                    <color key="backgroundColor" systemColor="systemOrangeColor"/>
+                    <collectionViewFlowLayout key="collectionViewLayout" minimumLineSpacing="10" minimumInteritemSpacing="10" id="yQN-da-lsb">
+                        <size key="itemSize" width="128" height="128"/>
+                        <size key="headerReferenceSize" width="0.0" height="0.0"/>
+                        <size key="footerReferenceSize" width="0.0" height="0.0"/>
+                        <inset key="sectionInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
+                    </collectionViewFlowLayout>
+                </collectionView>
+                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="ceC-h1-vtD" customClass="CustomNavigationBar" customModule="assignment" customModuleProvider="target">
+                    <rect key="frame" x="0.0" y="44" width="414" height="50"/>
+                    <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="50" id="1qd-dv-xx0"/>
+                    </constraints>
+                </view>
+            </subviews>
+            <viewLayoutGuide key="safeArea" id="fnl-2z-Ty3"/>
+            <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+            <constraints>
+                <constraint firstItem="fnl-2z-Ty3" firstAttribute="trailing" secondItem="ceC-h1-vtD" secondAttribute="trailing" id="2oG-Vk-Pbz"/>
+                <constraint firstItem="fnl-2z-Ty3" firstAttribute="trailing" secondItem="eO7-Zd-qvV" secondAttribute="trailing" constant="20" id="Hkd-XX-18l"/>
+                <constraint firstItem="ceC-h1-vtD" firstAttribute="top" secondItem="fnl-2z-Ty3" secondAttribute="top" id="LR9-bS-HBb"/>
+                <constraint firstItem="eO7-Zd-qvV" firstAttribute="top" secondItem="ceC-h1-vtD" secondAttribute="bottom" constant="-5" id="RjV-62-pCL"/>
+                <constraint firstItem="fnl-2z-Ty3" firstAttribute="bottom" secondItem="eO7-Zd-qvV" secondAttribute="bottom" constant="10" id="gb2-L2-r6A"/>
+                <constraint firstItem="ceC-h1-vtD" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" id="iZH-wV-MP3"/>
+                <constraint firstItem="eO7-Zd-qvV" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" constant="20" id="rr4-dT-JQf"/>
+            </constraints>
+            <point key="canvasLocation" x="40.579710144927539" y="129.91071428571428"/>
+        </view>
+    </objects>
+    <resources>
+        <systemColor name="systemBackgroundColor">
+            <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+        </systemColor>
+        <systemColor name="systemOrangeColor">
+            <color red="1" green="0.58431372549019611" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </systemColor>
+    </resources>
+</document>
