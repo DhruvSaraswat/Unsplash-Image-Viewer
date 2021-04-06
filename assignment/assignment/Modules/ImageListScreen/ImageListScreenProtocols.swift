@@ -24,6 +24,12 @@ protocol ViewToPresenterImageListScreenProtocol: class {
     /// - Parameter index: An `Int` denoting the index whose `UnsplashImageDetails` have to be fetched.
     /// - Returns: The `UnsplashImageDetails` object at the specified index.
     func fetchUnsplashImageDetails(atIndex index: Int) -> UnsplashImageDetails
+    
+    
+    /// Used to redirect the user to the Image Details screen, when the user taps / selects an image in the Image List Screen.
+    /// - Parameters:
+    ///   - index: An `int` denoting the index of the cell which was selected by the user in the Image List Screen.
+    func pushToImageDetailsScreen(selectedCellIndex index: Int)
 }
 
 protocol PresenterToViewImageListScreenProtocol: class {
@@ -41,16 +47,20 @@ protocol PresenterToRouterImageListScreenProtocol: class {
     static func createModule() -> UINavigationController
     
     
-    /// This method pushes the user to the Details Screen, where the entire image is loaded.
+    /// This method pushes the user to the Details Screen, where the entire image is loaded, and other relevant details are also displayed.
     /// - Parameters:
     ///   - blurHash: A `String` representing the blurHash of the image. This will be used to show the placeholder of the image, while the full raw image is being fetched in the background.
-    ///   - rawImageURL: A `String` representing the raw URL of the image.
-    ///   - imageWidth: An `Int` representing the width of the image.
-    ///   - imageHeight: An `Int` representing the height of the image.
+    ///   - fullImageURL: A `String` representing the URL of the full image with its maximum dimensions ( as opposed to regular, small or thummnail image URLs ).
+    ///   - location: A `String` representing the location.
+    ///   - imageDescriptionn: A `String` representing the description of the image.
+    ///   - profileImageURL: A `String` representing the user's profile image URL.
+    ///   - name: A `String` representing the name ( or the Unsplash username ) of the user.
     func pushToDetailsScreen(withBlurHash blurHash: String,
-                             withURL rawImageURL: String,
-                             withImageWidth imageWidth: Int,
-                             withImageHeight imageHeight: Int)
+                             withURL fullImageURL: String,
+                             withLocation location: String,
+                             withImageDescription imageDescriptionn: String,
+                             withProfileImageURL profileImageURL: String,
+                             withUserName name: String)
 }
 
 protocol PresenterToInteractorImageListScreenProtocol: class {

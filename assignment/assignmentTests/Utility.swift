@@ -50,6 +50,8 @@ class Utility {
         unsplashImageDetails.urls = generateRandomUnsplashImageURLs()
         unsplashImageDetails.user = generateRandomUnsplashUserDetails()
         unsplashImageDetails.width = generateRandomPositiveInteger(inclusive: 10, exclusive: 100)
+        unsplashImageDetails.description = generateAlphanumericString(length: 10)
+        unsplashImageDetails.alt_description = generateAlphanumericString(length: 10)
         return unsplashImageDetails
     }
     
@@ -71,6 +73,9 @@ class Utility {
     /// - Returns: An `UnsplashUserDetails` object populated with random values.
     static func generateRandomUnsplashUserDetails() -> UnsplashUserDetails {
         var unsplashUserDetails = UnsplashUserDetails()
+        unsplashUserDetails.location = generateAlphanumericString(length: 10)
+        unsplashUserDetails.name = generateAlphanumericString(length: 10)
+        unsplashUserDetails.username = generateAlphanumericString(length: 10)
         unsplashUserDetails.profile_image = generateRandomUnsplashUserProfileImageURLs()
         return unsplashUserDetails
     }

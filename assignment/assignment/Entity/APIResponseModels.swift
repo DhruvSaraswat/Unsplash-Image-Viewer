@@ -16,6 +16,12 @@ struct UnsplashImageDetails: Codable {
     /// A `String` denoting the blurHash String representation of the image. This can be used to show a placeholder image while the actual image is being fetched in the background.
     var blur_hash: String?
     
+    /// A `String` denoting the description of the image.
+    var description: String?
+    
+    /// A `String` denoting the alternate description of the image.
+    var alt_description: String?
+    
     /// An `UnsplashImageURLs` object.
     var urls: UnsplashImageURLs?
     
@@ -45,6 +51,15 @@ struct UnsplashImageURLs: Codable {
 
 /// Used to model the Unsplash user details returned by Unsplash APIs.
 struct UnsplashUserDetails: Codable {
+    /// A `String` representing the Unsplash username of the user.
+    var username: String?
+    
+    /// A `String` representing the name of the Unsplash user.
+    var name: String?
+    
+    /// A `String` representing the location of the Unsplash user.
+    var location: String?
+    
     /// An `UnsplashUserProfileImageURLs` object.
     var profile_image: UnsplashUserProfileImageURLs?
 }

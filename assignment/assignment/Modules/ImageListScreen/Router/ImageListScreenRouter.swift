@@ -26,7 +26,12 @@ class ImageListScreenRouter: PresenterToRouterImageListScreenProtocol {
         return navigationController
     }
     
-    func pushToDetailsScreen(withBlurHash blurHash: String, withURL rawImageURL: String, withImageWidth imageWidth: Int, withImageHeight imageHeight: Int) {
+    func pushToDetailsScreen(withBlurHash blurHash: String,
+                             withURL fullImageURL: String,
+                             withLocation location: String,
+                             withImageDescription imageDescriptionn: String,
+                             withProfileImageURL profileImageURL: String,
+                             withUserName name: String) {
         
     }
 }
