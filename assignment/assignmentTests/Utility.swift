@@ -5,6 +5,8 @@
 //  Created by Saraswat, Dhruv on 06/04/21.
 //
 
+@testable import assignment
+
 /// This class contains utility methods which can be used throughout the unit test modulle of this project.
 class Utility {
     /// A `static` utility method which returns an alphanumeric `String` containing the specified number of characters.
@@ -36,5 +38,51 @@ class Utility {
             return nil
         }
         return Int.random(in: lowerBound..<upperBound)
+    }
+    
+    
+    /// A `static` utility method which returns an `UnsplashImageDetails` object populated with random values.
+    /// - Returns: An `UnsplashImageDetails` object populated with random values.
+    static func generateRandomUnsplashImageDetails() -> UnsplashImageDetails {
+        var unsplashImageDetails = UnsplashImageDetails()
+        unsplashImageDetails.blur_hash = generateAlphanumericString(length: 10)
+        unsplashImageDetails.height = generateRandomPositiveInteger(inclusive: 10, exclusive: 100)
+        unsplashImageDetails.urls = generateRandomUnsplashImageURLs()
+        unsplashImageDetails.user = generateRandomUnsplashUserDetails()
+        unsplashImageDetails.width = generateRandomPositiveInteger(inclusive: 10, exclusive: 100)
+        return unsplashImageDetails
+    }
+    
+    
+    /// A `static` utility method which returns an `UnsplashImageURLs` object populated with random values.
+    /// - Returns: An `UnsplashImageURLs` object populated with random values.
+    static func generateRandomUnsplashImageURLs() -> UnsplashImageURLs {
+        var unsplashImageURLs = UnsplashImageURLs()
+        unsplashImageURLs.full = generateAlphanumericString(length: 10)
+        unsplashImageURLs.raw = generateAlphanumericString(length: 10)
+        unsplashImageURLs.regular = generateAlphanumericString(length: 10)
+        unsplashImageURLs.small = generateAlphanumericString(length: 10)
+        unsplashImageURLs.thumb = generateAlphanumericString(length: 10)
+        return unsplashImageURLs
+    }
+    
+    
+    /// A `static` utility method which returns an `UnsplashUserDetails` object populated with random values.
+    /// - Returns: An `UnsplashUserDetails` object populated with random values.
+    static func generateRandomUnsplashUserDetails() -> UnsplashUserDetails {
+        var unsplashUserDetails = UnsplashUserDetails()
+        unsplashUserDetails.profile_image = generateRandomUnsplashUserProfileImageURLs()
+        return unsplashUserDetails
+    }
+    
+    
+    /// A `static` utility method which returns an `UnsplashUserProfileImageURLs` object populated with random values.
+    /// - Returns: An `UnsplashUserProfileImageURLs` object populated with random values.
+    static func generateRandomUnsplashUserProfileImageURLs() -> UnsplashUserProfileImageURLs {
+        var unsplashUserProfileImageURLs = UnsplashUserProfileImageURLs()
+        unsplashUserProfileImageURLs.large = generateAlphanumericString(length: 10)
+        unsplashUserProfileImageURLs.medium = generateAlphanumericString(length: 10)
+        unsplashUserProfileImageURLs.small = generateAlphanumericString(length: 10)
+        return unsplashUserProfileImageURLs
     }
 }

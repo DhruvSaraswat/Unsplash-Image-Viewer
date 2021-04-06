@@ -48,6 +48,7 @@
 		3274891A261BC8EB000E2559 /* CustomNavigationBar.xib in Resources */ = {isa = PBXBuildFile; fileRef = 32748919261BC8EB000E2559 /* CustomNavigationBar.xib */; };
 		32748928261C2252000E2559 /* ImageListScreenCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 32748926261C2252000E2559 /* ImageListScreenCollectionViewCell.swift */; };
 		32748929261C2252000E2559 /* ImageListScreenCollectionViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 32748927261C2252000E2559 /* ImageListScreenCollectionViewCell.xib */; };
+		3274893C261C3D08000E2559 /* ImageListScreenPresenterTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3274893B261C3D08000E2559 /* ImageListScreenPresenterTests.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -115,6 +116,7 @@
 		32748919261BC8EB000E2559 /* CustomNavigationBar.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = CustomNavigationBar.xib; sourceTree = "<group>"; };
 		32748926261C2252000E2559 /* ImageListScreenCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageListScreenCollectionViewCell.swift; sourceTree = "<group>"; };
 		32748927261C2252000E2559 /* ImageListScreenCollectionViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ImageListScreenCollectionViewCell.xib; sourceTree = "<group>"; };
+		3274893B261C3D08000E2559 /* ImageListScreenPresenterTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageListScreenPresenterTests.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -181,6 +183,7 @@
 		327487C8261A2091000E2559 /* assignmentTests */ = {
 			isa = PBXGroup;
 			children = (
+				32748939261C3C89000E2559 /* ImageListScreen */,
 				327487C9261A2091000E2559 /* assignmentTests.swift */,
 				327487CB261A2091000E2559 /* Info.plist */,
 				327488AB261B9981000E2559 /* AppConfigTests.swift */,
@@ -337,6 +340,22 @@
 				32748927261C2252000E2559 /* ImageListScreenCollectionViewCell.xib */,
 			);
 			path = Cell;
+			sourceTree = "<group>";
+		};
+		32748939261C3C89000E2559 /* ImageListScreen */ = {
+			isa = PBXGroup;
+			children = (
+				3274893A261C3C9A000E2559 /* Presenter */,
+			);
+			path = ImageListScreen;
+			sourceTree = "<group>";
+		};
+		3274893A261C3C9A000E2559 /* Presenter */ = {
+			isa = PBXGroup;
+			children = (
+				3274893B261C3D08000E2559 /* ImageListScreenPresenterTests.swift */,
+			);
+			path = Presenter;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -509,6 +528,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				3274893C261C3D08000E2559 /* ImageListScreenPresenterTests.swift in Sources */,
 				327488BF261BA68E000E2559 /* Utility.swift in Sources */,
 				327487CA261A2091000E2559 /* assignmentTests.swift in Sources */,
 				327488AC261B9981000E2559 /* AppConfigTests.swift in Sources */,

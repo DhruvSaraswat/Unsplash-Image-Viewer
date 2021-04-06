@@ -8,7 +8,7 @@
 import UIKit
 
 /// An `enum` denoting the different kinds of errors which can arise from Network calls.
-enum Error: Swift.Error {
+enum Error: Swift.Error, CaseIterable {
     /// When the clientID is invalid.
     case invalidClientID
     

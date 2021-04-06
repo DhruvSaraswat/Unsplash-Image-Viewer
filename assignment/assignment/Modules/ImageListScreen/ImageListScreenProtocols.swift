@@ -11,6 +11,7 @@ protocol ViewToPresenterImageListScreenProtocol: class {
     var view: PresenterToViewImageListScreenProtocol? { get set }
     var interactor: PresenterToInteractorImageListScreenProtocol? { get set }
     var router: PresenterToRouterImageListScreenProtocol? { get set }
+    var currentCountOfUnsplashImageDetailsDisplayed: Int { get }
     
     /// Notifies the presenter to fetch the data to update the view.
     /// - Parameter page: An `Int` representing the page of the result to be loaded.
