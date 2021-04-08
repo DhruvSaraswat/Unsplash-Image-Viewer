@@ -17,6 +17,14 @@ class ImageListScreenInteractor: PresenterToInteractorImageListScreenProtocol {
     }
     
     func loadRandomImages(withPage page: Int) {
-        
+        self.networkLayer.loadRandomImages(withPage: page, resultsPerPage: 10) { (result) in
+            switch result {
+            case .success(let unsplashImageDetailsList):
+                self.presenter?.onImagesFetched(unsplashImageDetailsList: unsplashImageDetailsList)
+                
+            case .failure(let error):
+                self.presenter?.onImagesFetchError(error: error)
+            }
+        }
     }
 }

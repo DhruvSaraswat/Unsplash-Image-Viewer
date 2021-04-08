@@ -154,7 +154,7 @@ class ImageListScreenPresenterTests: XCTestCase {
     
     func testPushToImageDetailsScreen_WhenAllValuesAreNonNil() {
         var unsplashImageDetailsList = [UnsplashImageDetails]()
-        unsplashImageDetailsList.append(generateUnsplashUserImageDetailsWithSpecificValues())
+        unsplashImageDetailsList.append(Utility.generateUnsplashUserImageDetailsWithSpecificValues())
         presenter = ImageListScreenPresenter(unsplashImageDetailsList)
         presenter.view = view
         presenter.interactor = interactor
@@ -169,7 +169,7 @@ class ImageListScreenPresenterTests: XCTestCase {
     
     func testPushToImageDetailsScreen_WhenBlurHashIsNil() {
         var unsplashImageDetailsList = [UnsplashImageDetails]()
-        var unsplashImageDetails = generateUnsplashUserImageDetailsWithSpecificValues()
+        var unsplashImageDetails = Utility.generateUnsplashUserImageDetailsWithSpecificValues()
         unsplashImageDetails.blur_hash = nil
         unsplashImageDetailsList.append(unsplashImageDetails)
         presenter = ImageListScreenPresenter(unsplashImageDetailsList)
@@ -188,7 +188,7 @@ class ImageListScreenPresenterTests: XCTestCase {
     
     func testPushToImageDetailsScreen_WhenFullURLIsNil() {
         var unsplashImageDetailsList = [UnsplashImageDetails]()
-        var unsplashImageDetails = generateUnsplashUserImageDetailsWithSpecificValues()
+        var unsplashImageDetails = Utility.generateUnsplashUserImageDetailsWithSpecificValues()
         unsplashImageDetails.urls?.full = nil
         unsplashImageDetailsList.append(unsplashImageDetails)
         presenter = ImageListScreenPresenter(unsplashImageDetailsList)
@@ -207,7 +207,7 @@ class ImageListScreenPresenterTests: XCTestCase {
     
     func testPushToImageDetailsScreen_WhenLocationIsNil() {
         var unsplashImageDetailsList = [UnsplashImageDetails]()
-        var unsplashImageDetails = generateUnsplashUserImageDetailsWithSpecificValues()
+        var unsplashImageDetails = Utility.generateUnsplashUserImageDetailsWithSpecificValues()
         unsplashImageDetails.user?.location = nil
         unsplashImageDetailsList.append(unsplashImageDetails)
         presenter = ImageListScreenPresenter(unsplashImageDetailsList)
@@ -226,7 +226,7 @@ class ImageListScreenPresenterTests: XCTestCase {
     
     func testPushToImageDetailsScreen_WhenImageDescriptionAndAltDescriptionIsNil() {
         var unsplashImageDetailsList = [UnsplashImageDetails]()
-        var unsplashImageDetails = generateUnsplashUserImageDetailsWithSpecificValues()
+        var unsplashImageDetails = Utility.generateUnsplashUserImageDetailsWithSpecificValues()
         unsplashImageDetails.alt_description = nil
         unsplashImageDetails.description = nil
         unsplashImageDetailsList.append(unsplashImageDetails)
@@ -247,7 +247,7 @@ class ImageListScreenPresenterTests: XCTestCase {
     
     func testPushToImageDetailsScreen_WhenImageDescriptionIsNilAndAltDescriptionIsNotNil() {
         var unsplashImageDetailsList = [UnsplashImageDetails]()
-        var unsplashImageDetails = generateUnsplashUserImageDetailsWithSpecificValues()
+        var unsplashImageDetails = Utility.generateUnsplashUserImageDetailsWithSpecificValues()
         unsplashImageDetails.description = nil
         unsplashImageDetailsList.append(unsplashImageDetails)
         presenter = ImageListScreenPresenter(unsplashImageDetailsList)
@@ -266,7 +266,7 @@ class ImageListScreenPresenterTests: XCTestCase {
     
     func testPushToImageDetailsScreen_WhenSmallProfileImageURLIsNil() {
         var unsplashImageDetailsList = [UnsplashImageDetails]()
-        var unsplashImageDetails = generateUnsplashUserImageDetailsWithSpecificValues()
+        var unsplashImageDetails = Utility.generateUnsplashUserImageDetailsWithSpecificValues()
         unsplashImageDetails.user?.profile_image?.small = nil
         unsplashImageDetailsList.append(unsplashImageDetails)
         presenter = ImageListScreenPresenter(unsplashImageDetailsList)
@@ -285,7 +285,7 @@ class ImageListScreenPresenterTests: XCTestCase {
     
     func testPushToImageDetailsScreen_WhenNameIsNilAndUsernameIsNotNil() {
         var unsplashImageDetailsList = [UnsplashImageDetails]()
-        var unsplashImageDetails = generateUnsplashUserImageDetailsWithSpecificValues()
+        var unsplashImageDetails = Utility.generateUnsplashUserImageDetailsWithSpecificValues()
         unsplashImageDetails.user?.name = nil
         unsplashImageDetailsList.append(unsplashImageDetails)
         presenter = ImageListScreenPresenter(unsplashImageDetailsList)
@@ -304,7 +304,7 @@ class ImageListScreenPresenterTests: XCTestCase {
     
     func testPushToImageDetailsScreen_WhenNameIsNotNilAndUsernameIsNil() {
         var unsplashImageDetailsList = [UnsplashImageDetails]()
-        var unsplashImageDetails = generateUnsplashUserImageDetailsWithSpecificValues()
+        var unsplashImageDetails = Utility.generateUnsplashUserImageDetailsWithSpecificValues()
         unsplashImageDetails.user?.username = nil
         unsplashImageDetailsList.append(unsplashImageDetails)
         presenter = ImageListScreenPresenter(unsplashImageDetailsList)
@@ -323,7 +323,7 @@ class ImageListScreenPresenterTests: XCTestCase {
     
     func testPushToImageDetailsScreen_WhenNameAndUsernameIsNil() {
         var unsplashImageDetailsList = [UnsplashImageDetails]()
-        var unsplashImageDetails = generateUnsplashUserImageDetailsWithSpecificValues()
+        var unsplashImageDetails = Utility.generateUnsplashUserImageDetailsWithSpecificValues()
         unsplashImageDetails.user?.name = nil
         unsplashImageDetails.user?.username = nil
         unsplashImageDetailsList.append(unsplashImageDetails)
@@ -340,22 +340,6 @@ class ImageListScreenPresenterTests: XCTestCase {
         XCTAssertFalse(interactor.isLoadRandomImagesMethodCalled, "The loadRandomImages() interactor method should not be called.")
         XCTAssertFalse(view.isShowErrorMethodCalled, "The showError() view method should not be called.")
         XCTAssertFalse(view.isShowImagesMethodCalled, "The showImages() view method should not be called.")
-    }
-    
-    private func generateUnsplashUserImageDetailsWithSpecificValues() -> UnsplashImageDetails {
-        var unsplashImageDetails = UnsplashImageDetails()
-        unsplashImageDetails.alt_description = "alt_description_Value"
-        unsplashImageDetails.description = "description_Value"
-        unsplashImageDetails.blur_hash = "blurHash_value"
-        unsplashImageDetails.user = UnsplashUserDetails()
-        unsplashImageDetails.user?.profile_image = UnsplashUserProfileImageURLs()
-        unsplashImageDetails.user?.profile_image?.small = "profileImageURL_Value"
-        unsplashImageDetails.user?.location = "location_Value"
-        unsplashImageDetails.user?.name = "name_Value"
-        unsplashImageDetails.user?.username = "username_Value"
-        unsplashImageDetails.urls = UnsplashImageURLs()
-        unsplashImageDetails.urls?.full = "fullImageURL_Value"
-        return unsplashImageDetails
     }
     
 }

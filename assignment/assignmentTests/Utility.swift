@@ -90,4 +90,25 @@ class Utility {
         unsplashUserProfileImageURLs.small = generateAlphanumericString(length: 10)
         return unsplashUserProfileImageURLs
     }
+    
+    
+    /// A `static` utility method which returns an `UnsplashImageDetails` object populated with specific values.
+    ///
+    /// This can be used to assert specific values in unit tests.
+    /// - Returns: An `UnsplashImageDetails` object populated with specific values.
+    static func generateUnsplashUserImageDetailsWithSpecificValues() -> UnsplashImageDetails {
+        var unsplashImageDetails = UnsplashImageDetails()
+        unsplashImageDetails.alt_description = "alt_description_Value"
+        unsplashImageDetails.description = "description_Value"
+        unsplashImageDetails.blur_hash = "blurHash_value"
+        unsplashImageDetails.user = UnsplashUserDetails()
+        unsplashImageDetails.user?.profile_image = UnsplashUserProfileImageURLs()
+        unsplashImageDetails.user?.profile_image?.small = "profileImageURL_Value"
+        unsplashImageDetails.user?.location = "location_Value"
+        unsplashImageDetails.user?.name = "name_Value"
+        unsplashImageDetails.user?.username = "username_Value"
+        unsplashImageDetails.urls = UnsplashImageURLs()
+        unsplashImageDetails.urls?.full = "fullImageURL_Value"
+        return unsplashImageDetails
+    }
 }

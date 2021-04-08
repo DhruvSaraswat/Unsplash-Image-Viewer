@@ -49,6 +49,9 @@
 		32748928261C2252000E2559 /* ImageListScreenCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 32748926261C2252000E2559 /* ImageListScreenCollectionViewCell.swift */; };
 		32748929261C2252000E2559 /* ImageListScreenCollectionViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 32748927261C2252000E2559 /* ImageListScreenCollectionViewCell.xib */; };
 		3274893C261C3D08000E2559 /* ImageListScreenPresenterTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3274893B261C3D08000E2559 /* ImageListScreenPresenterTests.swift */; };
+		32748972261CAF36000E2559 /* ImageListScreenInteractorTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 32748971261CAF36000E2559 /* ImageListScreenInteractorTests.swift */; };
+		32CC54E4261E66E500963D76 /* LoadingIndicatorView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 32CC54E2261E66E500963D76 /* LoadingIndicatorView.swift */; };
+		32CC54E5261E66E500963D76 /* LoadingIndicatorView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 32CC54E3261E66E500963D76 /* LoadingIndicatorView.xib */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -117,6 +120,9 @@
 		32748926261C2252000E2559 /* ImageListScreenCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageListScreenCollectionViewCell.swift; sourceTree = "<group>"; };
 		32748927261C2252000E2559 /* ImageListScreenCollectionViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ImageListScreenCollectionViewCell.xib; sourceTree = "<group>"; };
 		3274893B261C3D08000E2559 /* ImageListScreenPresenterTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageListScreenPresenterTests.swift; sourceTree = "<group>"; };
+		32748971261CAF36000E2559 /* ImageListScreenInteractorTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageListScreenInteractorTests.swift; sourceTree = "<group>"; };
+		32CC54E2261E66E500963D76 /* LoadingIndicatorView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoadingIndicatorView.swift; sourceTree = "<group>"; };
+		32CC54E3261E66E500963D76 /* LoadingIndicatorView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = LoadingIndicatorView.xib; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -183,7 +189,7 @@
 		327487C8261A2091000E2559 /* assignmentTests */ = {
 			isa = PBXGroup;
 			children = (
-				32748939261C3C89000E2559 /* ImageListScreen */,
+				32748939261C3C89000E2559 /* ImageListScreenTests */,
 				327487C9261A2091000E2559 /* assignmentTests.swift */,
 				327487CB261A2091000E2559 /* Info.plist */,
 				327488AB261B9981000E2559 /* AppConfigTests.swift */,
@@ -338,16 +344,19 @@
 			children = (
 				32748926261C2252000E2559 /* ImageListScreenCollectionViewCell.swift */,
 				32748927261C2252000E2559 /* ImageListScreenCollectionViewCell.xib */,
+				32CC54E2261E66E500963D76 /* LoadingIndicatorView.swift */,
+				32CC54E3261E66E500963D76 /* LoadingIndicatorView.xib */,
 			);
 			path = Cell;
 			sourceTree = "<group>";
 		};
-		32748939261C3C89000E2559 /* ImageListScreen */ = {
+		32748939261C3C89000E2559 /* ImageListScreenTests */ = {
 			isa = PBXGroup;
 			children = (
+				32748970261CAF11000E2559 /* Interactor */,
 				3274893A261C3C9A000E2559 /* Presenter */,
 			);
-			path = ImageListScreen;
+			path = ImageListScreenTests;
 			sourceTree = "<group>";
 		};
 		3274893A261C3C9A000E2559 /* Presenter */ = {
@@ -356,6 +365,14 @@
 				3274893B261C3D08000E2559 /* ImageListScreenPresenterTests.swift */,
 			);
 			path = Presenter;
+			sourceTree = "<group>";
+		};
+		32748970261CAF11000E2559 /* Interactor */ = {
+			isa = PBXGroup;
+			children = (
+				32748971261CAF36000E2559 /* ImageListScreenInteractorTests.swift */,
+			);
+			path = Interactor;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -484,6 +501,7 @@
 				32748800261A3030000E2559 /* Roboto-Light.ttf in Resources */,
 				3274880C261A3030000E2559 /* Roboto-ThinItalic.ttf in Resources */,
 				327487FD261A3030000E2559 /* Roboto-Regular.ttf in Resources */,
+				32CC54E5261E66E500963D76 /* LoadingIndicatorView.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -519,6 +537,7 @@
 				3274889A261B7903000E2559 /* APIResponseModels.swift in Sources */,
 				327488D7261BAE37000E2559 /* ImageListScreenPresenter.swift in Sources */,
 				32748894261B76E5000E2559 /* NetworkLayer.swift in Sources */,
+				32CC54E4261E66E500963D76 /* LoadingIndicatorView.swift in Sources */,
 				327487B5261A208F000E2559 /* SceneDelegate.swift in Sources */,
 				327488A2261B918D000E2559 /* AppExtensions.swift in Sources */,
 			);
@@ -528,6 +547,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				32748972261CAF36000E2559 /* ImageListScreenInteractorTests.swift in Sources */,
 				3274893C261C3D08000E2559 /* ImageListScreenPresenterTests.swift in Sources */,
 				327488BF261BA68E000E2559 /* Utility.swift in Sources */,
 				327487CA261A2091000E2559 /* assignmentTests.swift in Sources */,
