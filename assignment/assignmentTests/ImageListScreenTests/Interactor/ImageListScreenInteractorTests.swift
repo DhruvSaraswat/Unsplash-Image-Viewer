@@ -40,6 +40,13 @@ class ImageListScreenInteractorTests: XCTestCase {
         XCTAssertTrue(presenter.isOnImagesFetchErrorMethodCalled, "The onImagesFetchError() presenter method should be called.")
         XCTAssertFalse(presenter.isOnImagesFetchedMethodCalled, "The onImagesFetched() presenter method should not be called.")
     }
+    
+    func testLoadImage() throws {
+        let url = URL(string: "https://example.com")
+        interactor.networkLayer?.loadImage(from: url!, completion: nil)
+        XCTAssertFalse(presenter.isOnImagesFetchErrorMethodCalled, "The onImagesFetchError() presenter method should not be called.")
+        XCTAssertFalse(presenter.isOnImagesFetchedMethodCalled, "The onImagesFetched() presenter method should not be called.")
+    }
 
 }
 
@@ -91,6 +98,11 @@ fileprivate class NetworkLayerMock: NetworkLayerProtocol {
         } else {
             completion(.failure(Error.generic), "") // call the completion handler with a specific (instead of random) Error so that its value can be asserted.
         }
+    }
+    
+    func loadImage(from url: URL, completion: ((UIImage?) -> Void)?) {
+        let expectedURL = URL(string: "https://example.com")
+        XCTAssertEqual(expectedURL, url, "The URL should be \(url).")
     }
     
 }

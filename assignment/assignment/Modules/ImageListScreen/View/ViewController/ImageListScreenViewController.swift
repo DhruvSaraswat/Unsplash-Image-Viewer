@@ -54,10 +54,14 @@ class ImageListScreenViewController: UIViewController {
 extension ImageListScreenViewController: UICollectionViewDataSource, UICollectionViewDelegateFlowLayout, UICollectionViewDataSourcePrefetching {
     // MARK: UICollectionViewDataSourcePrefetching
     func collectionView(_ collectionView: UICollectionView, prefetchItemsAt indexPaths: [IndexPath]) {
-        let customImageView = CustomImageView()
         for indexPath in indexPaths {
             let unsplashImageDetails = presenter?.fetchUnsplashImageDetails(atIndex: indexPath.row)
-            customImageView.loadImage(from: URL(string: unsplashImageDetails?.urls?.regular ?? "")!, blurHash: unsplashImageDetails?.blur_hash ?? "", forIndex: indexPath.row)
+            if let imageURL = URL(string: unsplashImageDetails?.urls?.regular ?? "") {
+                NetworkLayer.sharedInstance.loadImage(from: imageURL)
+            }
+            if let userProfileImageURL = URL(string: unsplashImageDetails?.user?.profile_image?.medium ?? "") {
+                NetworkLayer.sharedInstance.loadImage(from: userProfileImageURL)
+            }
         }
     }
     
@@ -93,21 +97,33 @@ extension ImageListScreenViewController: UICollectionViewDataSource, UICollectio
         
         unsplashImageCell.tag = indexPath.row
         
-        unsplashImageCell.unsplashImageView.loadImage(from: imageURL, blurHash: unsplashImageDetails?.blur_hash ?? "", forIndex: indexPath.row) { (loadedImage) in
+        unsplashImageCell.unsplashImageView.image = UIImage(blurHash: unsplashImageDetails?.blur_hash ?? "", size: CGSize(width: 20, height: 20))
+        unsplashImageCell.unsplashImageView.addSpinner()
+        
+        NetworkLayer.sharedInstance.loadImage(from: imageURL) { (loadedImage) in
+            guard let image = loadedImage else {
+                return
+            }
             DispatchQueue.main.async {
                 if unsplashImageCell.tag == indexPath.row {
-                    unsplashImageCell.unsplashImageView.image = loadedImage
+                    unsplashImageCell.unsplashImageView.removeSpinner()
+                    unsplashImageCell.unsplashImageView.image = image
                 }
             }
         }
         
         if indexPath.row != 0 {
             unsplashImageCell.unsplashUserProfileImageView.isHidden = false
+            unsplashImageCell.unsplashUserProfileImageView.addSpinner()
             if let userProfileImageURL = URL(string: unsplashImageDetails?.user?.profile_image?.medium ?? "") {
-                unsplashImageCell.unsplashUserProfileImageView.loadImage(from: userProfileImageURL, blurHash: "", forIndex: indexPath.row) { (loadedImage) in
+                NetworkLayer.sharedInstance.loadImage(from: userProfileImageURL) { (loadedImage) in
+                    guard let image = loadedImage else {
+                        return
+                    }
                     DispatchQueue.main.async {
                         if unsplashImageCell.tag == indexPath.row {
-                            unsplashImageCell.unsplashUserProfileImageView.image = loadedImage
+                            unsplashImageCell.unsplashUserProfileImageView.removeSpinner()
+                            unsplashImageCell.unsplashUserProfileImageView.image = image
                         }
                     }
                 }

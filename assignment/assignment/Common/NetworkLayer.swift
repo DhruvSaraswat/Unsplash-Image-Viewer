@@ -30,12 +30,23 @@ protocol NetworkLayerProtocol {
     ///   - resultsPerPage: An `Int` denoting the results per page to be fetched. Maximum value is 30 and default value is 10. Refer the [Pagination section in Unsplash API Documentation](https://unsplash.com/documentation#pagination).
     ///   - completion: A trailing closure which gets called with the `Result` of the [List Photos Unsplash API](https://unsplash.com/documentation#list-photos) call.
     func loadRandomImages(withPage page: Int, resultsPerPage: Int, completion: @escaping (Result<[UnsplashImageDetails], Error>, String?) -> Void)
+    
+    
+    /// This method fetches an image from a `URL`, and then calls the optional completion handler with the resulting `UIImage`.
+    ///
+    /// Internally, this method first checks if the image from that URL is already stored in the cache, and only if it is not stored in the cache, it performs the HTTP(S) request, stores the image in cache and then calls the completion handler.
+    /// - Parameters:
+    ///   - url: A `URL` denonting the URL from which the image has to be loaded.
+    ///   - completion: An optional trailing closure which gets called with the resulting `UIImage`.
+    func loadImage(from url: URL, completion: ((_ loadedImage: UIImage?) -> Void)?)
 }
 
 class NetworkLayer: NetworkLayerProtocol {
     
     let urlSession: URLSession
     let clientID: String
+    public static let sharedInstance = NetworkLayer()
+    private let imageCache = NSCache<NSURL, UIImage>()
     
     /// Create an instance of `NetworkLayer` to carry out API calls and Network requests.
     /// - Parameter urlSession: A `URLSession` object. Default value is `URLSession.shared`.
@@ -73,6 +84,36 @@ class NetworkLayer: NetworkLayerProtocol {
             } catch {
                 completion(.failure(Error.unableToParseResponse), nil)
                 return
+            }
+        }.resume()
+    }
+    
+    func loadImage(from url: URL, completion: ((UIImage?) -> Void)? = nil) {
+        if let imageFromCache = imageCache.object(forKey: url as NSURL) {
+            if let completion = completion {
+                completion(imageFromCache)
+            }
+            return
+        }
+        
+        self.urlSession.dataTask(with: url) { (data, response, error) in
+            guard
+                let data = data,
+                let loadedImage = UIImage(data: data)
+            else {
+                print("Counldn't load image from url = \(url)")
+                if let completion = completion {
+                    completion(nil)
+                }
+                return
+            }
+            
+            self.imageCache.setObject(loadedImage, forKey: url as NSURL)
+            
+            DispatchQueue.main.async {
+                if let completion = completion {
+                    completion(loadedImage)
+                }
             }
         }.resume()
     }
