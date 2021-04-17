@@ -24,7 +24,10 @@ class ImageListScreenPresenter: ViewToPresenterImageListScreenProtocol {
         self.totalCountOfPages = 1
     }
     
-    func updateView(withPage page: Int) {
+    func updateView(withPage page: Int, hasScreenRefreshed: Bool) {
+        if hasScreenRefreshed {
+            currentlyDisplayedUnsplashImageDetailsList?.removeAll()
+        }
         interactor?.loadRandomImages(withPage: page)
     }
     

@@ -16,7 +16,8 @@ protocol ViewToPresenterImageListScreenProtocol: class {
     
     /// Notifies the presenter to fetch the data to update the view.
     /// - Parameter page: An `Int` representing the page of the result to be loaded.
-    func updateView(withPage page: Int)
+    /// - Parameter hasScreenRefreshed: A `Bool` value indicating whether the user has performed the swipe-to-refresh action in the Image List Screen.
+    func updateView(withPage page: Int, hasScreenRefreshed: Bool)
     
     
     /// Used to fetch the `UnsplashImageDetails` at a particular index.

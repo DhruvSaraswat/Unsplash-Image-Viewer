@@ -32,8 +32,28 @@ class ImageListScreenPresenterTests: XCTestCase {
         presenter = nil
     }
     
-    func testUpdateView() {
-        presenter.updateView(withPage: 209)
+    func testUpdateView_WhenHasScreenRefreshedIsFalse() {
+        presenter.updateView(withPage: 209, hasScreenRefreshed: false)
+        XCTAssertTrue(interactor.isLoadRandomImagesMethodCalled, "The loadRandomImages() interactor method should be called.")
+        XCTAssertFalse(view.isShowErrorMethodCalled, "The showError() view method should not be called.")
+        XCTAssertFalse(view.isShowImagesMethodCalled, "The showImages() view method should not be called.")
+        XCTAssertFalse(router.isPushToDetailsScreenMethodCalled, "The pushToDetailsScreen() router method should not be called.")
+    }
+    
+    func testUpdateView_WhenHasScreenRefreshedIsTrue() {
+        var unsplashImageDetailsList = [UnsplashImageDetails]()
+        for _ in 0..<5 {
+            unsplashImageDetailsList.append(Utility.generateRandomUnsplashImageDetails())
+        }
+        // Create a presenter with 5 array elements.
+        presenter = ImageListScreenPresenter(unsplashImageDetailsList)
+        presenter.view = view
+        presenter.interactor = interactor
+        presenter.router = router
+        
+        XCTAssertEqual(presenter.currentCountOfUnsplashImageDetailsFetched, 5, "There should be 5 unsplashImageDetails stored in presenter.")
+        presenter.updateView(withPage: 209, hasScreenRefreshed: true)
+        XCTAssertEqual(presenter.currentCountOfUnsplashImageDetailsFetched, 0, "Now, there should be 0 unsplashImageDetails stored in presenter.")
         XCTAssertTrue(interactor.isLoadRandomImagesMethodCalled, "The loadRandomImages() interactor method should be called.")
         XCTAssertFalse(view.isShowErrorMethodCalled, "The showError() view method should not be called.")
         XCTAssertFalse(view.isShowImagesMethodCalled, "The showImages() view method should not be called.")
@@ -134,7 +154,7 @@ class ImageListScreenPresenterTests: XCTestCase {
         
         XCTAssertEqual(presenter.currentCountOfUnsplashImageDetailsFetched, 5, "The count of images displayed should be 5 initially.")
         
-        presenter.onImagesFetched(unsplashImageDetailsList: unsplashImageDetailsList) // on fetching 5 more unsplashImageDetails.
+        presenter.onImagesFetched(unsplashImageDetailsList: unsplashImageDetailsList, linkHeaderValue: "") // on fetching 5 more unsplashImageDetails.
         XCTAssertEqual(presenter.currentCountOfUnsplashImageDetailsFetched, 10,
                        "The count of images displayed should be 5 (initially) + 5 (added now) = 10.")
         XCTAssertTrue(view.isShowImagesMethodCalled, "The showImages() view method should be called.")

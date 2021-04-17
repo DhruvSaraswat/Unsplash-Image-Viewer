@@ -35,7 +35,7 @@ class CustomImageView: UIImageView {
         
         // Set the placeholder image using the blurHash value, while the actual image is being fetched.
         if !blurHash.isEmpty {
-            self.image = UIImage(blurHash: blurHash, size: CGSize(width: 10, height: 10))
+            self.image = UIImage(blurHash: blurHash, size: CGSize(width: 20, height: 20))
         }
         
         let task = URLSession.shared.dataTask(with: url) { (data, response, error) in

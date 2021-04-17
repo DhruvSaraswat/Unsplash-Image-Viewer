@@ -12,6 +12,7 @@ class ImageListScreenViewController: UIViewController {
     @IBOutlet weak var imageCollectionView: UICollectionView!
     var currentPage: Int?
     var presenter: ViewToPresenterImageListScreenProtocol?
+    private let refreshControl = UIRefreshControl()
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -23,10 +24,18 @@ class ImageListScreenViewController: UIViewController {
         imageCollectionView.prefetchDataSource = self
         imageCollectionView.backgroundColor = .clear
         
+        refreshControl.addTarget(self, action: #selector(refreshImages), for: .valueChanged)
+        imageCollectionView.refreshControl = refreshControl // for swipe-to-refresh user action.
+        
         imageCollectionView.register(UINib(nibName: "ImageListScreenCollectionViewCell", bundle: nil),
                                      forCellWithReuseIdentifier: ImageListScreenCollectionViewCell.reuseIdentifier)
         
-        presenter?.updateView(withPage: currentPage ?? 1)
+        presenter?.updateView(withPage: currentPage ?? 1, hasScreenRefreshed: false)
+    }
+    
+    @objc func refreshImages() {
+        currentPage = 1 // reset current page to 1
+        presenter?.updateView(withPage: currentPage ?? 1, hasScreenRefreshed: true)
     }
 
 }
@@ -86,6 +95,9 @@ extension ImageListScreenViewController: PresenterToViewImageListScreenProtocol 
         self.currentPage! += 1
         DispatchQueue.main.async {
             self.imageCollectionView.reloadData()
+            if self.refreshControl.isRefreshing {
+                self.refreshControl.endRefreshing()
+            }
         }
     }
     
