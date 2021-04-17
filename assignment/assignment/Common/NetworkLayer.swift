@@ -46,14 +46,18 @@ class NetworkLayer: NetworkLayerProtocol {
     let urlSession: URLSession
     let clientID: String
     public static let sharedInstance = NetworkLayer()
-    private let imageCache = NSCache<NSURL, UIImage>()
+    private let imageCache: ImageCache
     
     /// Create an instance of `NetworkLayer` to carry out API calls and Network requests.
     /// - Parameter urlSession: A `URLSession` object. Default value is `URLSession.shared`.
     /// - Parameter clientID: A `String` containing the value of the clientID.
-    init(urlSession: URLSession = URLSession.shared, clientID: String = AppConfig.sharedInstance.getUnsplashAPIKey()) {
+    /// - Parameter imageCache: An `ImageCache` object. Default value is `ImageCache.sharedInstance`.
+    init(urlSession: URLSession = URLSession.shared,
+         clientID: String = AppConfig.sharedInstance.getUnsplashAPIKey(),
+         imageCache: ImageCache = ImageCache.sharedInstance) {
         self.urlSession = urlSession
         self.clientID = clientID
+        self.imageCache = imageCache
     }
     
     func loadRandomImages(withPage page: Int = 1, resultsPerPage: Int = 10,
@@ -89,7 +93,7 @@ class NetworkLayer: NetworkLayerProtocol {
     }
     
     func loadImage(from url: URL, completion: ((UIImage?) -> Void)? = nil) {
-        if let imageFromCache = imageCache.object(forKey: url as NSURL) {
+        if let imageFromCache = self.imageCache.retrieveImage(for: url) {
             if let completion = completion {
                 completion(imageFromCache)
             }
@@ -108,7 +112,7 @@ class NetworkLayer: NetworkLayerProtocol {
                 return
             }
             
-            self.imageCache.setObject(loadedImage, forKey: url as NSURL)
+            self.imageCache.storeImage(image: loadedImage, for: url)
             
             DispatchQueue.main.async {
                 if let completion = completion {

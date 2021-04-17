@@ -56,6 +56,9 @@ extension ImageListScreenViewController: UICollectionViewDataSource, UICollectio
     func collectionView(_ collectionView: UICollectionView, prefetchItemsAt indexPaths: [IndexPath]) {
         for indexPath in indexPaths {
             let unsplashImageDetails = presenter?.fetchUnsplashImageDetails(atIndex: indexPath.row)
+            
+            /// Start loading the image and the user's profile image asynchronously and store it in cache, so that when the cell appears in the viewport of the device, the images would already be downloaded / downloading would be in progress.
+            /// This makes for a smooth scrolling experience with no lag.
             if let imageURL = URL(string: unsplashImageDetails?.urls?.regular ?? "") {
                 NetworkLayer.sharedInstance.loadImage(from: imageURL)
             }
@@ -180,16 +183,18 @@ extension ImageListScreenViewController: UICollectionViewDataSource, UICollectio
     func collectionView(_ collectionView: UICollectionView, didEndDisplayingSupplementaryView view: UICollectionReusableView, forElementOfKind elementKind: String, at indexPath: IndexPath) {
         if elementKind == UICollectionView.elementKindSectionFooter {
             self.loadingView?.activityIndicatorView.stopAnimating()
+            self.loadingView?.activityIndicatorView.isHidden = true
+            self.loadingView?.endOfListLabel.isHidden = false
             self.imageCollectionView.collectionViewLayout.invalidateLayout()
         }
     }
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, referenceSizeForFooterInSection section: Int) -> CGSize {
-        if self.isLoading {
-            return CGSize.zero
-        } else {
-            return CGSize(width: collectionView.bounds.size.width, height: 80)
-        }
+        return CGSize(width: collectionView.bounds.size.width, height: 80)
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        presenter?.pushToImageDetailsScreen(selectedCellIndex: indexPath.row)
     }
     
 }
