@@ -38,6 +38,10 @@
                         <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <nil key="highlightedColor"/>
                     </label>
+                    <view hidden="YES" alpha="0.59999999999999998" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="NVC-KX-TLL">
+                        <rect key="frame" x="0.0" y="0.0" width="400" height="400"/>
+                        <color key="backgroundColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                    </view>
                 </subviews>
             </view>
             <viewLayoutGuide key="safeArea" id="ZTg-uK-7eu"/>
@@ -45,13 +49,18 @@
                 <constraint firstItem="ZTg-uK-7eu" firstAttribute="bottom" secondItem="wcT-Tz-jvv" secondAttribute="bottom" constant="10" id="Ayk-r9-im0"/>
                 <constraint firstItem="WqL-Hk-e6M" firstAttribute="leading" secondItem="gTV-IL-0wX" secondAttribute="leading" id="BFP-Kf-NDq"/>
                 <constraint firstAttribute="trailing" secondItem="WqL-Hk-e6M" secondAttribute="trailing" id="KGd-Ej-ETh"/>
+                <constraint firstItem="NVC-KX-TLL" firstAttribute="leading" secondItem="gTV-IL-0wX" secondAttribute="leading" id="Qcy-A0-KRe"/>
                 <constraint firstAttribute="bottom" secondItem="WqL-Hk-e6M" secondAttribute="bottom" id="Qhj-IU-Pkm"/>
+                <constraint firstItem="NVC-KX-TLL" firstAttribute="top" secondItem="gTV-IL-0wX" secondAttribute="top" id="Yqx-r0-nQm"/>
+                <constraint firstAttribute="bottom" secondItem="NVC-KX-TLL" secondAttribute="bottom" id="av2-Lv-glh"/>
+                <constraint firstAttribute="trailing" secondItem="NVC-KX-TLL" secondAttribute="trailing" id="bee-Bn-6Wf"/>
                 <constraint firstItem="WqL-Hk-e6M" firstAttribute="top" secondItem="gTV-IL-0wX" secondAttribute="top" id="dY6-e2-LQS"/>
                 <constraint firstItem="ZTg-uK-7eu" firstAttribute="trailing" secondItem="wcT-Tz-jvv" secondAttribute="trailing" constant="10" id="lia-9l-OUd"/>
                 <constraint firstItem="4Tj-X0-ow0" firstAttribute="centerY" secondItem="ZTg-uK-7eu" secondAttribute="centerY" id="nG7-tx-0E2"/>
                 <constraint firstItem="4Tj-X0-ow0" firstAttribute="centerX" secondItem="ZTg-uK-7eu" secondAttribute="centerX" id="wgZ-vC-jU3"/>
             </constraints>
             <connections>
+                <outlet property="darkOverlay" destination="NVC-KX-TLL" id="WHU-I6-A7Y"/>
                 <outlet property="dosplashLabel" destination="4Tj-X0-ow0" id="sh2-Mu-hr0"/>
                 <outlet property="unsplashImageView" destination="WqL-Hk-e6M" id="2DG-fT-mcR"/>
                 <outlet property="unsplashUserProfileImageView" destination="wcT-Tz-jvv" id="Xcr-Jf-enV"/>

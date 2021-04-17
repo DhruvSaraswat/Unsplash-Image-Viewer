@@ -78,18 +78,13 @@ extension ImageListScreenViewController: UICollectionViewDataSource, UICollectio
                 subview.removeFromSuperview()
             }
         }
-        /// This prevents the DOSPLASH label from getting added to any cells apart from the topmost (first) cell, since that same cell with the same subviews gets reused.
+        /// This prevents the dark overlay and the DOSPLASH label from getting added to any cells apart from the topmost (first) cell, since that same cell with the same subviews gets reused.
+        unsplashImageCell.darkOverlay.isHidden = true
         unsplashImageCell.dosplashLabel.isHidden = true
         
         if indexPath.row == 0 {
             // Add a dark overlay on the first image displayed, and display the text "DOSPLASH" on top of it.
-            let tintView = UIView()
-            tintView.backgroundColor = UIColor(white: 0, alpha: 0.6)
-            tintView.frame = CGRect(x: 0, y: 0, width: unsplashImageCell.unsplashImageView.frame.width,
-                                    height: unsplashImageCell.unsplashImageView.frame.height)
-            
-            unsplashImageCell.unsplashImageView.addSubview(tintView)
-            
+            unsplashImageCell.darkOverlay.isHidden = false
             unsplashImageCell.dosplashLabel.isHidden = false
         }
         
