@@ -11,7 +11,8 @@ protocol ViewToPresenterImageListScreenProtocol: class {
     var view: PresenterToViewImageListScreenProtocol? { get set }
     var interactor: PresenterToInteractorImageListScreenProtocol? { get set }
     var router: PresenterToRouterImageListScreenProtocol? { get set }
-    var currentCountOfUnsplashImageDetailsDisplayed: Int { get }
+    var currentCountOfUnsplashImageDetailsFetched: Int { get }
+    var totalCountOfPages: Int { get }
     
     /// Notifies the presenter to fetch the data to update the view.
     /// - Parameter page: An `Int` representing the page of the result to be loaded.
@@ -74,7 +75,7 @@ protocol PresenterToInteractorImageListScreenProtocol: class {
 protocol InteractorToPresenterImageListScreenProtocol: class {
     /// This method is used to return the list of `UnsplashImageDetails` to the presenter.
     /// - Parameter unsplashImageDetailsList: An array of `UnsplashImageDetails`.
-    func onImagesFetched(unsplashImageDetailsList: [UnsplashImageDetails])
+    func onImagesFetched(unsplashImageDetailsList: [UnsplashImageDetails], linkHeaderValue: String?)
     
     
     /// This method is used to return an `Error` to the presenter, in case the API call gave an error.

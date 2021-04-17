@@ -9,8 +9,9 @@ import UIKit
 
 class ImageListScreenCollectionViewCell: UICollectionViewCell {
 
-    @IBOutlet weak var unsplashImageView: UIImageView!
-    @IBOutlet weak var unsplashUserProfileImageView: UIImageView!
+    @IBOutlet weak var unsplashImageView: CustomImageView!
+    @IBOutlet weak var unsplashUserProfileImageView: CustomImageView!
+    static let reuseIdentifier = "ImageListScreenCollectionViewCell"
     
     override func awakeFromNib() {
         super.awakeFromNib()

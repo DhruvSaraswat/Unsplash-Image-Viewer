@@ -29,7 +29,7 @@ protocol NetworkLayerProtocol {
     ///   - page: An `Int` denoting the page to be fetched. Default value is 1.
     ///   - resultsPerPage: An `Int` denoting the results per page to be fetched. Maximum value is 30 and default value is 10. Refer the [Pagination section in Unsplash API Documentation](https://unsplash.com/documentation#pagination).
     ///   - completion: A trailing closure which gets called with the `Result` of the [List Photos Unsplash API](https://unsplash.com/documentation#list-photos) call.
-    func loadRandomImages(withPage page: Int, resultsPerPage: Int, completion: @escaping (Result<[UnsplashImageDetails], Error>) -> Void)
+    func loadRandomImages(withPage page: Int, resultsPerPage: Int, completion: @escaping (Result<[UnsplashImageDetails], Error>, String?) -> Void)
 }
 
 class NetworkLayer: NetworkLayerProtocol {
@@ -46,16 +46,16 @@ class NetworkLayer: NetworkLayerProtocol {
     }
     
     func loadRandomImages(withPage page: Int = 1, resultsPerPage: Int = 10,
-                          completion: @escaping (Result<[UnsplashImageDetails], Error>) -> Void) {
+                          completion: @escaping (Result<[UnsplashImageDetails], Error>, String?) -> Void) {
         if clientID.isEmpty {
-            completion(.failure(Error.invalidClientID))
+            completion(.failure(Error.invalidClientID), nil)
         }
         guard let url = URL(string: "https://api.unsplash.com/photos?client_id=\(clientID)&page=\(page)&per_page=\(resultsPerPage)")
         else { return }
         
         self.urlSession.dataTask(with: URLRequest(url: url)) { data, response, error in
             if let error = error {
-                completion(.failure(error as! Error))
+                completion(.failure(error as! Error), nil)
                 return
             }
             
@@ -63,15 +63,15 @@ class NetworkLayer: NetworkLayerProtocol {
                 let httpResponse = (response as? HTTPURLResponse),
                 httpResponse.statusCode == 200,
                 let responseData = String(data: data!, encoding: String.Encoding.utf8) else {
-                completion(.failure(Error.unknownAPIResponse))
+                completion(.failure(Error.unknownAPIResponse), nil)
                 return
             }
             
             do {
                 let result = try JSONDecoder().decode([UnsplashImageDetails].self, from: Data(responseData.utf8))
-                completion(.success(result))
+                completion(.success(result), httpResponse.value(forHTTPHeaderField: "link"))
             } catch {
-                completion(.failure(Error.unableToParseResponse))
+                completion(.failure(Error.unableToParseResponse), nil)
                 return
             }
         }.resume()

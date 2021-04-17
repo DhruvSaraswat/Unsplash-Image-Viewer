@@ -132,10 +132,10 @@ class ImageListScreenPresenterTests: XCTestCase {
         presenter.interactor = interactor
         presenter.router = router
         
-        XCTAssertEqual(presenter.currentCountOfUnsplashImageDetailsDisplayed, 5, "The count of images displayed should be 5 initially.")
+        XCTAssertEqual(presenter.currentCountOfUnsplashImageDetailsFetched, 5, "The count of images displayed should be 5 initially.")
         
         presenter.onImagesFetched(unsplashImageDetailsList: unsplashImageDetailsList) // on fetching 5 more unsplashImageDetails.
-        XCTAssertEqual(presenter.currentCountOfUnsplashImageDetailsDisplayed, 10,
+        XCTAssertEqual(presenter.currentCountOfUnsplashImageDetailsFetched, 10,
                        "The count of images displayed should be 5 (initially) + 5 (added now) = 10.")
         XCTAssertTrue(view.isShowImagesMethodCalled, "The showImages() view method should be called.")
         XCTAssertFalse(interactor.isLoadRandomImagesMethodCalled, "The loadRandomImages() interactor method should not be called.")

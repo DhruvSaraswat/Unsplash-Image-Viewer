@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		32190E3D262A8A6D00AECBA4 /* CustomImageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 32190E3C262A8A6D00AECBA4 /* CustomImageView.swift */; };
 		327487B3261A208F000E2559 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 327487B2261A208F000E2559 /* AppDelegate.swift */; };
 		327487B5261A208F000E2559 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 327487B4261A208F000E2559 /* SceneDelegate.swift */; };
 		327487BC261A2090000E2559 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 327487BB261A2090000E2559 /* Assets.xcassets */; };
@@ -50,6 +51,9 @@
 		32748929261C2252000E2559 /* ImageListScreenCollectionViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 32748927261C2252000E2559 /* ImageListScreenCollectionViewCell.xib */; };
 		3274893C261C3D08000E2559 /* ImageListScreenPresenterTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3274893B261C3D08000E2559 /* ImageListScreenPresenterTests.swift */; };
 		32748972261CAF36000E2559 /* ImageListScreenInteractorTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 32748971261CAF36000E2559 /* ImageListScreenInteractorTests.swift */; };
+		32C9BDD8262168F600010103 /* response.json in Resources */ = {isa = PBXBuildFile; fileRef = 32C9BDD7262168F600010103 /* response.json */; };
+		32C9BDDD26216CC600010103 /* response_page2.json in Resources */ = {isa = PBXBuildFile; fileRef = 32C9BDDC26216CC600010103 /* response_page2.json */; };
+		32C9BDE226216DCD00010103 /* response_page3.json in Resources */ = {isa = PBXBuildFile; fileRef = 32C9BDE126216DCD00010103 /* response_page3.json */; };
 		32CC54E4261E66E500963D76 /* LoadingIndicatorView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 32CC54E2261E66E500963D76 /* LoadingIndicatorView.swift */; };
 		32CC54E5261E66E500963D76 /* LoadingIndicatorView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 32CC54E3261E66E500963D76 /* LoadingIndicatorView.xib */; };
 /* End PBXBuildFile section */
@@ -72,6 +76,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		32190E3C262A8A6D00AECBA4 /* CustomImageView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomImageView.swift; sourceTree = "<group>"; };
 		327487AF261A208F000E2559 /* assignment.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = assignment.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		327487B2261A208F000E2559 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		327487B4261A208F000E2559 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -121,6 +126,9 @@
 		32748927261C2252000E2559 /* ImageListScreenCollectionViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ImageListScreenCollectionViewCell.xib; sourceTree = "<group>"; };
 		3274893B261C3D08000E2559 /* ImageListScreenPresenterTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageListScreenPresenterTests.swift; sourceTree = "<group>"; };
 		32748971261CAF36000E2559 /* ImageListScreenInteractorTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageListScreenInteractorTests.swift; sourceTree = "<group>"; };
+		32C9BDD7262168F600010103 /* response.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = response.json; sourceTree = "<group>"; };
+		32C9BDDC26216CC600010103 /* response_page2.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = response_page2.json; sourceTree = "<group>"; };
+		32C9BDE126216DCD00010103 /* response_page3.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = response_page3.json; sourceTree = "<group>"; };
 		32CC54E2261E66E500963D76 /* LoadingIndicatorView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoadingIndicatorView.swift; sourceTree = "<group>"; };
 		32CC54E3261E66E500963D76 /* LoadingIndicatorView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = LoadingIndicatorView.xib; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -307,6 +315,9 @@
 			isa = PBXGroup;
 			children = (
 				327488DC261BAE6B000E2559 /* ImageListScreenInteractor.swift */,
+				32C9BDD7262168F600010103 /* response.json */,
+				32C9BDDC26216CC600010103 /* response_page2.json */,
+				32C9BDE126216DCD00010103 /* response_page3.json */,
 			);
 			path = Interactor;
 			sourceTree = "<group>";
@@ -335,6 +346,7 @@
 			children = (
 				32748914261BC8D8000E2559 /* CustomNavigationBar.swift */,
 				32748919261BC8EB000E2559 /* CustomNavigationBar.xib */,
+				32190E3C262A8A6D00AECBA4 /* CustomImageView.swift */,
 			);
 			path = CustomViews;
 			sourceTree = "<group>";
@@ -482,6 +494,7 @@
 				3274880B261A3030000E2559 /* Roboto-Italic.ttf in Resources */,
 				32748802261A3030000E2559 /* Roboto-BoldItalic.ttf in Resources */,
 				32748929261C2252000E2559 /* ImageListScreenCollectionViewCell.xib in Resources */,
+				32C9BDDD26216CC600010103 /* response_page2.json in Resources */,
 				327487BF261A2090000E2559 /* LaunchScreen.storyboard in Resources */,
 				32748803261A3030000E2559 /* Roboto-Bold.ttf in Resources */,
 				32748807261A3030000E2559 /* RobotoCondensed-Italic.ttf in Resources */,
@@ -491,6 +504,7 @@
 				3274880E261A3030000E2559 /* RobotoCondensed-Regular.ttf in Resources */,
 				32748804261A3030000E2559 /* Roboto-Thin.ttf in Resources */,
 				3274880D261A3030000E2559 /* RobotoCondensed-BoldItalic.ttf in Resources */,
+				32C9BDD8262168F600010103 /* response.json in Resources */,
 				32748909261BBFA1000E2559 /* ImageListScreenViewController.xib in Resources */,
 				327487FF261A3030000E2559 /* Roboto-LightItalic.ttf in Resources */,
 				32748806261A3030000E2559 /* Roboto-BlackItalic.ttf in Resources */,
@@ -501,6 +515,7 @@
 				32748800261A3030000E2559 /* Roboto-Light.ttf in Resources */,
 				3274880C261A3030000E2559 /* Roboto-ThinItalic.ttf in Resources */,
 				327487FD261A3030000E2559 /* Roboto-Regular.ttf in Resources */,
+				32C9BDE226216DCD00010103 /* response_page3.json in Resources */,
 				32CC54E5261E66E500963D76 /* LoadingIndicatorView.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -530,6 +545,7 @@
 				32748908261BBFA1000E2559 /* ImageListScreenViewController.swift in Sources */,
 				327488A7261B9412000E2559 /* AppConfig.swift in Sources */,
 				327487B3261A208F000E2559 /* AppDelegate.swift in Sources */,
+				32190E3D262A8A6D00AECBA4 /* CustomImageView.swift in Sources */,
 				3274888E261B679F000E2559 /* ImageListScreenProtocols.swift in Sources */,
 				327488DD261BAE6B000E2559 /* ImageListScreenInteractor.swift in Sources */,
 				32748928261C2252000E2559 /* ImageListScreenCollectionViewCell.swift in Sources */,
