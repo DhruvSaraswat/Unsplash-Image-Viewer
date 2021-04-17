@@ -78,9 +78,6 @@ extension ImageListScreenViewController: UICollectionViewDataSource, UICollectio
                 subview.removeFromSuperview()
             }
         }
-        /// This prevents the dark overlay and the DOSPLASH label from getting added to any cells apart from the topmost (first) cell, since that same cell with the same subviews gets reused.
-        unsplashImageCell.darkOverlay.isHidden = true
-        unsplashImageCell.dosplashLabel.isHidden = true
         
         if indexPath.row == 0 {
             // Add a dark overlay on the first image displayed, and display the text "DOSPLASH" on top of it.
@@ -90,8 +87,11 @@ extension ImageListScreenViewController: UICollectionViewDataSource, UICollectio
         
         unsplashImageCell.unsplashImageView.loadImage(from: imageURL, blurHash: unsplashImageDetails?.blur_hash ?? "")
         
-        if let userProfileImageURL = URL(string: unsplashImageDetails?.user?.profile_image?.medium ?? "") {
-            unsplashImageCell.unsplashUserProfileImageView.loadImage(from: userProfileImageURL, blurHash: "")
+        if indexPath.row != 0 {
+            unsplashImageCell.unsplashUserProfileImageView.isHidden = false
+            if let userProfileImageURL = URL(string: unsplashImageDetails?.user?.profile_image?.medium ?? "") {
+                unsplashImageCell.unsplashUserProfileImageView.loadImage(from: userProfileImageURL, blurHash: "")
+            }
         }
         return unsplashImageCell
     }

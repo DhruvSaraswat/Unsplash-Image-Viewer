@@ -35,5 +35,13 @@ class ImageListScreenCollectionViewCell: UICollectionViewCell {
         // Scale the font size of the dosplashLabel for different screen sizes.
         self.dosplashLabel.font = UIFont.systemFont(ofSize: self.frame.size.height * 60 / 400)
     }
+    
+    override func prepareForReuse() {
+        super.prepareForReuse()
+        
+        self.dosplashLabel.isHidden = true
+        self.darkOverlay.isHidden = true
+        self.unsplashUserProfileImageView.isHidden = true
+    }
 
 }
