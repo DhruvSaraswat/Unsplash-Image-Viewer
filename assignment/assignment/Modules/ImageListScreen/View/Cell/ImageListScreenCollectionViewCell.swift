@@ -11,6 +11,7 @@ class ImageListScreenCollectionViewCell: UICollectionViewCell {
 
     @IBOutlet weak var unsplashImageView: CustomImageView!
     @IBOutlet weak var unsplashUserProfileImageView: CustomImageView!
+    @IBOutlet weak var dosplashLabel: UILabel!
     static let reuseIdentifier = "ImageListScreenCollectionViewCell"
     
     override func awakeFromNib() {

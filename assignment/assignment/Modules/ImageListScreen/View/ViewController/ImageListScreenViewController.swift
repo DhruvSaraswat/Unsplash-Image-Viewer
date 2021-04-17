@@ -8,7 +8,7 @@
 import UIKit
 
 class ImageListScreenViewController: UIViewController {
-
+    
     @IBOutlet weak var imageCollectionView: UICollectionView!
     var currentPage: Int?
     var presenter: ViewToPresenterImageListScreenProtocol?
@@ -37,7 +37,12 @@ class ImageListScreenViewController: UIViewController {
         currentPage = 1 // reset current page to 1
         presenter?.updateView(withPage: currentPage ?? 1, hasScreenRefreshed: true)
     }
-
+    
+    override func viewWillTransition(to size: CGSize, with coordinator: UIViewControllerTransitionCoordinator) {
+        // When the device rotates, invalidate the layout of the imageCollectionView so that the cells resize appropriately.
+        imageCollectionView.collectionViewLayout.invalidateLayout()
+    }
+    
 }
 
 extension ImageListScreenViewController: UICollectionViewDataSource, UICollectionViewDelegateFlowLayout, UICollectionViewDataSourcePrefetching {
@@ -67,8 +72,25 @@ extension ImageListScreenViewController: UICollectionViewDataSource, UICollectio
             return cell
         }
         
+        if !unsplashImageCell.unsplashImageView.subviews.isEmpty {
+            /// This prevents the dark overlay from getting added to any cells apart from the topmost (first) cell, since that same cell with the same subviews gets reused.
+            for subview in unsplashImageCell.unsplashImageView.subviews {
+                subview.removeFromSuperview()
+            }
+        }
+        /// This prevents the DOSPLASH label from getting added to any cells apart from the topmost (first) cell, since that same cell with the same subviews gets reused.
+        unsplashImageCell.dosplashLabel.isHidden = true
+        
         if indexPath.row == 0 {
-            // Set a dark overlay on the image, and display the Unsplash text.
+            // Add a dark overlay on the first image displayed, and display the text "DOSPLASH" on top of it.
+            let tintView = UIView()
+            tintView.backgroundColor = UIColor(white: 0, alpha: 0.6)
+            tintView.frame = CGRect(x: 0, y: 0, width: unsplashImageCell.unsplashImageView.frame.width,
+                                    height: unsplashImageCell.unsplashImageView.frame.height)
+            
+            unsplashImageCell.unsplashImageView.addSubview(tintView)
+            
+            unsplashImageCell.dosplashLabel.isHidden = false
         }
         
         unsplashImageCell.unsplashImageView.loadImage(from: imageURL, blurHash: unsplashImageDetails?.blur_hash ?? "")
