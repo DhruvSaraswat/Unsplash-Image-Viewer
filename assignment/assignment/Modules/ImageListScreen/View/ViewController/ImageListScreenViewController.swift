@@ -13,6 +13,8 @@ class ImageListScreenViewController: UIViewController {
     var currentPage: Int?
     var presenter: ViewToPresenterImageListScreenProtocol?
     private let refreshControl = UIRefreshControl()
+    var loadingView: LoadingIndicatorView?
+    var isLoading = false
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -29,6 +31,10 @@ class ImageListScreenViewController: UIViewController {
         
         imageCollectionView.register(UINib(nibName: "ImageListScreenCollectionViewCell", bundle: nil),
                                      forCellWithReuseIdentifier: ImageListScreenCollectionViewCell.reuseIdentifier)
+        
+        imageCollectionView.register(UINib(nibName: "LoadingIndicatorView", bundle: nil),
+                                     forSupplementaryViewOfKind: UICollectionView.elementKindSectionFooter,
+                                     withReuseIdentifier: LoadingIndicatorView.reuseIdentifier)
         
         presenter?.updateView(withPage: currentPage ?? 1, hasScreenRefreshed: false)
     }
@@ -51,7 +57,7 @@ extension ImageListScreenViewController: UICollectionViewDataSource, UICollectio
         let customImageView = CustomImageView()
         for indexPath in indexPaths {
             let unsplashImageDetails = presenter?.fetchUnsplashImageDetails(atIndex: indexPath.row)
-            customImageView.loadImage(from: URL(string: unsplashImageDetails?.urls?.regular ?? "")!, blurHash: unsplashImageDetails?.blur_hash ?? "")
+            customImageView.loadImage(from: URL(string: unsplashImageDetails?.urls?.regular ?? "")!, blurHash: unsplashImageDetails?.blur_hash ?? "", forIndex: indexPath.row)
         }
     }
     
@@ -85,12 +91,26 @@ extension ImageListScreenViewController: UICollectionViewDataSource, UICollectio
             unsplashImageCell.dosplashLabel.isHidden = false
         }
         
-        unsplashImageCell.unsplashImageView.loadImage(from: imageURL, blurHash: unsplashImageDetails?.blur_hash ?? "")
+        unsplashImageCell.tag = indexPath.row
+        
+        unsplashImageCell.unsplashImageView.loadImage(from: imageURL, blurHash: unsplashImageDetails?.blur_hash ?? "", forIndex: indexPath.row) { (loadedImage) in
+            DispatchQueue.main.async {
+                if unsplashImageCell.tag == indexPath.row {
+                    unsplashImageCell.unsplashImageView.image = loadedImage
+                }
+            }
+        }
         
         if indexPath.row != 0 {
             unsplashImageCell.unsplashUserProfileImageView.isHidden = false
             if let userProfileImageURL = URL(string: unsplashImageDetails?.user?.profile_image?.medium ?? "") {
-                unsplashImageCell.unsplashUserProfileImageView.loadImage(from: userProfileImageURL, blurHash: "")
+                unsplashImageCell.unsplashUserProfileImageView.loadImage(from: userProfileImageURL, blurHash: "", forIndex: indexPath.row) { (loadedImage) in
+                    DispatchQueue.main.async {
+                        if unsplashImageCell.tag == indexPath.row {
+                            unsplashImageCell.unsplashUserProfileImageView.image = loadedImage
+                        }
+                    }
+                }
             }
         }
         return unsplashImageCell
@@ -105,6 +125,57 @@ extension ImageListScreenViewController: UICollectionViewDataSource, UICollectio
         return CGSize(width: imageCollectionView.frame.width, height: height)
     }
     
+    func collectionView(_ collectionView: UICollectionView, willDisplay cell: UICollectionViewCell, forItemAt indexPath: IndexPath) {
+        if (currentPage ?? 1) < 4 {
+            if (indexPath.row >= ((presenter?.currentCountOfUnsplashImageDetailsFetched ?? 1) - 2)) && (!self.isLoading) {
+                // Load new page data.
+                self.isLoading = true
+                presenter?.updateView(withPage: currentPage ?? 1, hasScreenRefreshed: false)
+            }
+        } else {
+            // If the user has navigated to the end of the list, do not load any more pages.
+            self.isLoading = true
+        }
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, viewForSupplementaryElementOfKind kind: String, at indexPath: IndexPath) -> UICollectionReusableView {
+        let cell = collectionView.dequeueReusableSupplementaryView(ofKind: kind,
+                                                                   withReuseIdentifier: LoadingIndicatorView.reuseIdentifier,
+                                                                   for: indexPath)
+        
+        guard let footerView = cell as? LoadingIndicatorView else {
+            return cell
+        }
+        if kind == UICollectionView.elementKindSectionFooter {
+            loadingView = footerView
+            loadingView?.layer.borderColor = UIColor.clear.cgColor
+            loadingView?.backgroundColor = UIColor.clear
+            return footerView
+        }
+        return footerView
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, willDisplaySupplementaryView view: UICollectionReusableView, forElementKind elementKind: String, at indexPath: IndexPath) {
+        if elementKind == UICollectionView.elementKindSectionFooter {
+            self.loadingView?.activityIndicatorView.startAnimating()
+        }
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, didEndDisplayingSupplementaryView view: UICollectionReusableView, forElementOfKind elementKind: String, at indexPath: IndexPath) {
+        if elementKind == UICollectionView.elementKindSectionFooter {
+            self.loadingView?.activityIndicatorView.stopAnimating()
+            self.imageCollectionView.collectionViewLayout.invalidateLayout()
+        }
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, referenceSizeForFooterInSection section: Int) -> CGSize {
+        if self.isLoading {
+            return CGSize.zero
+        } else {
+            return CGSize(width: collectionView.bounds.size.width, height: 80)
+        }
+    }
+    
 }
 
 extension ImageListScreenViewController: PresenterToViewImageListScreenProtocol {
@@ -115,6 +186,7 @@ extension ImageListScreenViewController: PresenterToViewImageListScreenProtocol 
             if self.refreshControl.isRefreshing {
                 self.refreshControl.endRefreshing()
             }
+            self.isLoading = false
         }
     }
     

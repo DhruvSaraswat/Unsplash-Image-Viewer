@@ -13,7 +13,7 @@ class CustomImageView: UIImageView {
     var task: URLSessionDataTask!
     let spinner = UIActivityIndicatorView(style: .medium)
     
-    func loadImage(from url: URL, blurHash: String, completion: ((_ loadedImage: UIImage) -> Void)? = nil) {
+    func loadImage(from url: URL, blurHash: String, forIndex: Int, completion: ((_ loadedImage: UIImage) -> Void)? = nil) {
         
         // Assign nil to the image, to fix the flickering issue.
         image = nil
@@ -25,7 +25,6 @@ class CustomImageView: UIImageView {
         }
         
         if let imageFromCache = imageCache.object(forKey: url as NSURL) {
-            self.image = imageFromCache
             removeSpinner()
             if let completion = completion {
                 completion(imageFromCache)
@@ -50,7 +49,6 @@ class CustomImageView: UIImageView {
             imageCache.setObject(loadedImage, forKey: url as NSURL)
             
             DispatchQueue.main.async {
-                self.image = loadedImage
                 self.removeSpinner()
                 if let completion = completion {
                     completion(loadedImage)

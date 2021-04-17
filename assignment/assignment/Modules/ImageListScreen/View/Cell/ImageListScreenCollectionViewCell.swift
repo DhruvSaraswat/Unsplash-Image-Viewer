@@ -42,6 +42,9 @@ class ImageListScreenCollectionViewCell: UICollectionViewCell {
         self.dosplashLabel.isHidden = true
         self.darkOverlay.isHidden = true
         self.unsplashUserProfileImageView.isHidden = true
+        
+        self.unsplashImageView.image = nil
+        self.unsplashUserProfileImageView.image = nil
     }
 
 }
