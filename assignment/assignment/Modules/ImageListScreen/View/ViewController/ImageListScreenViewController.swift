@@ -15,6 +15,7 @@ class ImageListScreenViewController: UIViewController {
     private let refreshControl = UIRefreshControl()
     var loadingView: LoadingIndicatorView?
     var isLoading = false
+    var hasErrorOccurredWhileFetchingImageList = false
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -177,6 +178,10 @@ extension ImageListScreenViewController: UICollectionViewDataSource, UICollectio
     func collectionView(_ collectionView: UICollectionView, willDisplaySupplementaryView view: UICollectionReusableView, forElementKind elementKind: String, at indexPath: IndexPath) {
         if elementKind == UICollectionView.elementKindSectionFooter {
             self.loadingView?.activityIndicatorView.startAnimating()
+            if hasErrorOccurredWhileFetchingImageList {
+                self.loadingView?.activityIndicatorView.stopAnimating()
+                self.loadingView?.activityIndicatorView.isHidden = true
+            }
         }
     }
     
@@ -202,6 +207,7 @@ extension ImageListScreenViewController: UICollectionViewDataSource, UICollectio
 extension ImageListScreenViewController: PresenterToViewImageListScreenProtocol {
     func showImages() {
         self.currentPage! += 1
+        self.hasErrorOccurredWhileFetchingImageList = false
         DispatchQueue.main.async {
             self.imageCollectionView.reloadData()
             if self.refreshControl.isRefreshing {
@@ -212,7 +218,14 @@ extension ImageListScreenViewController: PresenterToViewImageListScreenProtocol 
     }
     
     func showError() {
-        
+        self.hasErrorOccurredWhileFetchingImageList = true
+        showAlert(withTitle:"Error in Fetching Images",
+                  withMessage: "An unexpected error occurred when fetching images, please try swiping down to reload and try again.")
+        if self.refreshControl.isRefreshing {
+            self.refreshControl.endRefreshing()
+            self.imageCollectionView.contentOffset = CGPoint.zero
+        }
+        self.imageCollectionView.collectionViewLayout.invalidateLayout()
     }
     
     func calculatedScaledHeight(imageHeight: CGFloat, imageWidth: CGFloat, cellWidth: CGFloat) -> CGFloat {
