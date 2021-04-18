@@ -5,6 +5,7 @@
 //  Created by Saraswat, Dhruv on 06/04/21.
 //
 
+import UIKit
 class ImageListScreenInteractor: PresenterToInteractorImageListScreenProtocol {
     
     weak var presenter: InteractorToPresenterImageListScreenProtocol?
@@ -17,10 +18,10 @@ class ImageListScreenInteractor: PresenterToInteractorImageListScreenProtocol {
     }
     
     func loadRandomImages(withPage page: Int) {
-        self.networkLayer.loadRandomImages(withPage: page, resultsPerPage: 10) { (result) in
+        self.networkLayer.loadRandomImages(withPage: page, resultsPerPage: 10) { (result, linkHeaderValue) in
             switch result {
             case .success(let unsplashImageDetailsList):
-                self.presenter?.onImagesFetched(unsplashImageDetailsList: unsplashImageDetailsList)
+                self.presenter?.onImagesFetched(unsplashImageDetailsList: unsplashImageDetailsList, linkHeaderValue: linkHeaderValue)
                 
             case .failure(let error):
                 self.presenter?.onImagesFetchError(error: error)

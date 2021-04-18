@@ -11,11 +11,13 @@ protocol ViewToPresenterImageListScreenProtocol: class {
     var view: PresenterToViewImageListScreenProtocol? { get set }
     var interactor: PresenterToInteractorImageListScreenProtocol? { get set }
     var router: PresenterToRouterImageListScreenProtocol? { get set }
-    var currentCountOfUnsplashImageDetailsDisplayed: Int { get }
+    var currentCountOfUnsplashImageDetailsFetched: Int { get }
+    var totalCountOfPages: Int { get }
     
     /// Notifies the presenter to fetch the data to update the view.
     /// - Parameter page: An `Int` representing the page of the result to be loaded.
-    func updateView(withPage page: Int)
+    /// - Parameter hasScreenRefreshed: A `Bool` value indicating whether the user has performed the swipe-to-refresh action in the Image List Screen.
+    func updateView(withPage page: Int, hasScreenRefreshed: Bool)
     
     
     /// Used to fetch the `UnsplashImageDetails` at a particular index.
@@ -49,18 +51,10 @@ protocol PresenterToRouterImageListScreenProtocol: class {
     
     /// This method pushes the user to the Details Screen, where the entire image is loaded, and other relevant details are also displayed.
     /// - Parameters:
-    ///   - blurHash: A `String` representing the blurHash of the image. This will be used to show the placeholder of the image, while the full raw image is being fetched in the background.
-    ///   - fullImageURL: A `String` representing the URL of the full image with its maximum dimensions ( as opposed to regular, small or thummnail image URLs ).
-    ///   - location: A `String` representing the location.
-    ///   - imageDescriptionn: A `String` representing the description of the image.
-    ///   - profileImageURL: A `String` representing the user's profile image URL.
-    ///   - name: A `String` representing the name ( or the Unsplash username ) of the user.
-    func pushToDetailsScreen(withBlurHash blurHash: String,
-                             withURL fullImageURL: String,
-                             withLocation location: String,
-                             withImageDescription imageDescriptionn: String,
-                             withProfileImageURL profileImageURL: String,
-                             withUserName name: String)
+    ///   - view: The view on which the Image Details screen has to be pushed.
+    ///   - unsplashImageDetails: An `UnsplashImageDetails` object.
+    func pushToDetailsScreen(fromScreen view: PresenterToViewImageListScreenProtocol,
+                             withUnsplashImageDetails unsplashImageDetails: UnsplashImageDetails)
 }
 
 protocol PresenterToInteractorImageListScreenProtocol: class {
@@ -74,7 +68,8 @@ protocol PresenterToInteractorImageListScreenProtocol: class {
 protocol InteractorToPresenterImageListScreenProtocol: class {
     /// This method is used to return the list of `UnsplashImageDetails` to the presenter.
     /// - Parameter unsplashImageDetailsList: An array of `UnsplashImageDetails`.
-    func onImagesFetched(unsplashImageDetailsList: [UnsplashImageDetails])
+    /// - Parameter linkHeaderValue: An optional `String` denoting the value of the "link" response header.
+    func onImagesFetched(unsplashImageDetailsList: [UnsplashImageDetails], linkHeaderValue: String?)
     
     
     /// This method is used to return an `Error` to the presenter, in case the API call gave an error.

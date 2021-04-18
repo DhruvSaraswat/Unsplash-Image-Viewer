@@ -40,6 +40,24 @@ class ImageListScreenInteractorTests: XCTestCase {
         XCTAssertTrue(presenter.isOnImagesFetchErrorMethodCalled, "The onImagesFetchError() presenter method should be called.")
         XCTAssertFalse(presenter.isOnImagesFetchedMethodCalled, "The onImagesFetched() presenter method should not be called.")
     }
+    
+    func testLoadImage() throws {
+        let url = URL(string: "https://example.com")
+        networkLayerMock.loadImage(from: url!, completion: nil)
+        XCTAssertTrue(networkLayerMock.isLoadImageMethodCalled, "The loadImage() method should be called.")
+        XCTAssertFalse(networkLayerMock.isCancelDownloadMethodCalled, "The cancelDownload() method should not be called.")
+        XCTAssertFalse(presenter.isOnImagesFetchErrorMethodCalled, "The onImagesFetchError() presenter method should not be called.")
+        XCTAssertFalse(presenter.isOnImagesFetchedMethodCalled, "The onImagesFetched() presenter method should not be called.")
+    }
+    
+    func testCancelDownload() throws {
+        let url = URL(string: "https://exampleforcancelurl.com")
+        networkLayerMock.cancelDownload(for: url!)
+        XCTAssertTrue(networkLayerMock.isCancelDownloadMethodCalled, "The cancelDownload() method should be called.")
+        XCTAssertFalse(networkLayerMock.isLoadImageMethodCalled, "The loadImage() method should not be called.")
+        XCTAssertFalse(presenter.isOnImagesFetchErrorMethodCalled, "The onImagesFetchError() presenter method should not be called.")
+        XCTAssertFalse(presenter.isOnImagesFetchedMethodCalled, "The onImagesFetched() presenter method should not be called.")
+    }
 
 }
 
@@ -50,7 +68,7 @@ class ImageListScreenInteractorMockWithInit: XCTestCase, PresenterToInteractorIm
     
     func loadRandomImages(withPage page: Int) {
         XCTAssertEqual(page, 29, "The page value should be 29.")
-        self.networkLayer?.loadRandomImages(withPage: page, resultsPerPage: 11) { (result) in
+        self.networkLayer?.loadRandomImages(withPage: page, resultsPerPage: 11) { (result, linkHeaderValue) in
             switch result {
             case .success(let successResponse):
                 XCTAssertEqual(successResponse.count, 1, "There should be 1 value in the success response array.")
@@ -62,7 +80,8 @@ class ImageListScreenInteractorMockWithInit: XCTestCase, PresenterToInteractorIm
                 XCTAssertEqual(successResponse[0].user?.location, "location_Value", "location value should be location_Value.")
                 XCTAssertEqual(successResponse[0].user?.name, "name_Value", "name value should be name_Value.")
                 XCTAssertEqual(successResponse[0].urls?.full, "fullImageURL_Value", "full imamge URL value should be fullImageURL_Value.")
-                self.presenter?.onImagesFetched(unsplashImageDetailsList: successResponse)
+                XCTAssertEqual(linkHeaderValue, "abcdef", "linkHeaderValue value should be abcdef.")
+                self.presenter?.onImagesFetched(unsplashImageDetailsList: successResponse, linkHeaderValue: linkHeaderValue)
                 self.expectation.fulfill()
                 
             case .failure(let error):
@@ -77,19 +96,33 @@ class ImageListScreenInteractorMockWithInit: XCTestCase, PresenterToInteractorIm
 
 fileprivate class NetworkLayerMock: NetworkLayerProtocol {
     var isLoadRandomImagesAPICallSuccessful = false
+    var isLoadImageMethodCalled = false
+    var isCancelDownloadMethodCalled = false
     
     func loadRandomImages(withPage page: Int,
                           resultsPerPage: Int,
-                          completion: @escaping (Result<[UnsplashImageDetails], Error>) -> Void) {
+                          completion: @escaping (Result<[UnsplashImageDetails], Error>, String?) -> Void) {
         XCTAssertEqual(page, 29, "page value should be 29.")
         XCTAssertEqual(resultsPerPage, 11, "resultsPerPage value should be 11.")
         if isLoadRandomImagesAPICallSuccessful {
             var unsplashImageDetailsList = [UnsplashImageDetails]()
             unsplashImageDetailsList.append(Utility.generateUnsplashUserImageDetailsWithSpecificValues())
-            completion(.success(unsplashImageDetailsList))
+            completion(.success(unsplashImageDetailsList), "abcdef")
         } else {
-            completion(.failure(Error.generic)) // call the completion handler with a specific (instead of random) Error so that its value can be asserted.
+            completion(.failure(Error.generic), "") // call the completion handler with a specific (instead of random) Error so that its value can be asserted.
         }
+    }
+    
+    func loadImage(from url: URL, completion: ((UIImage?) -> Void)?) {
+        isLoadImageMethodCalled = true
+        let expectedURL = URL(string: "https://example.com")
+        XCTAssertEqual(expectedURL, url, "The URL should be \(url).")
+    }
+    
+    func cancelDownload(for url: URL) {
+        isCancelDownloadMethodCalled = true
+        let expectedURL = URL(string: "https://exampleforcancelurl.com")
+        XCTAssertEqual(expectedURL, url, "The URL should be \(url).")
     }
     
 }
@@ -98,7 +131,7 @@ class MockPresenter: XCTestCase, InteractorToPresenterImageListScreenProtocol {
     var isOnImagesFetchedMethodCalled = false
     var isOnImagesFetchErrorMethodCalled = false
     
-    func onImagesFetched(unsplashImageDetailsList: [UnsplashImageDetails]) {
+    func onImagesFetched(unsplashImageDetailsList: [UnsplashImageDetails], linkHeaderValue: String?) {
         XCTAssertEqual(unsplashImageDetailsList.count, 1, "There should be 1 value in the success response array.")
         XCTAssertEqual(unsplashImageDetailsList[0].alt_description, "alt_description_Value", "alt_description value should be alt_description_Value.")
         XCTAssertEqual(unsplashImageDetailsList[0].description, "description_Value", "description value should be description_Value.")
