@@ -1,6 +1,8 @@
 # hapramp-assignment
 This repository contains the source code for the iOS app assignment given by Hapramp as part of their hiring process.
 
+![Demo](https://github.com/DhruvSaraswat/hapramp-assignment/blob/develop/assignment/assignment/Resources/README_Static_Resources/Initial_GIF.gif)
+
 # Get Started
 1. Clone this repository.
 2. Open the 
