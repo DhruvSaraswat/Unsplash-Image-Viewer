@@ -26,9 +26,11 @@ The Launch.storyboard file is used to setup the launch screen of the app.
 <li>The first image in the screen is covered by a dark overlay, and the "DOSPLASH" label text is shown on top of it.</li><br>
 <li>Clicking on any image will take the user to the Image Details screen, where the full-sized image will be displayed.</li><br>
 <li>If the user swipes to refresh the screen, a new set of images will be fetched, and the page count will be reset to 1.</li><br>
-<li>When the user reaches the end of the image list, a label saying "You have reached the end of the list." will be displayed.</li><br>
 <li>In case there is any error while fetching an image, an alert will be displayed.</li><br>
+<li>When the user reaches the end of the image list, a label saying "You have reached the end of the list." will be displayed.</li><br>
 </ul>
+
+![End-of-list-demo](https://github.com/DhruvSaraswat/hapramp-assignment/blob/develop/assignment/assignment/Resources/README_Static_Resources/End_Of_List_Demo.gif)
 
 ### Optimizations Done in this Screen
 <ul>
