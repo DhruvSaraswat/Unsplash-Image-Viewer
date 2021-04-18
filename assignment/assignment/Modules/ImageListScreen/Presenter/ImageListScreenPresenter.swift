@@ -24,7 +24,10 @@ class ImageListScreenPresenter: ViewToPresenterImageListScreenProtocol {
         self.totalCountOfPages = 1
     }
     
-    func updateView(withPage page: Int) {
+    func updateView(withPage page: Int, hasScreenRefreshed: Bool) {
+        if hasScreenRefreshed {
+            currentlyDisplayedUnsplashImageDetailsList?.removeAll()
+        }
         interactor?.loadRandomImages(withPage: page)
     }
     
@@ -33,22 +36,14 @@ class ImageListScreenPresenter: ViewToPresenterImageListScreenProtocol {
     }
     
     func pushToImageDetailsScreen(selectedCellIndex index: Int) {
-        let location = currentlyDisplayedUnsplashImageDetailsList?[index].user?.location ?? "Location not available"
-        let imageDescription = currentlyDisplayedUnsplashImageDetailsList?[index].description ?? currentlyDisplayedUnsplashImageDetailsList?[index].alt_description ?? "Image description not available"
-        let userName = currentlyDisplayedUnsplashImageDetailsList?[index].user?.name ?? currentlyDisplayedUnsplashImageDetailsList?[index].user?.username ?? "Name not available"
-        router?.pushToDetailsScreen(withBlurHash: currentlyDisplayedUnsplashImageDetailsList?[index].blur_hash ?? "",
-                                    withURL: currentlyDisplayedUnsplashImageDetailsList?[index].urls?.full ?? "",
-                                    withLocation: location,
-                                    withImageDescription: imageDescription,
-                                    withProfileImageURL: currentlyDisplayedUnsplashImageDetailsList?[index].user?.profile_image?.small ?? "",
-                                    withUserName: userName)
+        router?.pushToDetailsScreen(fromScreen: view!, withUnsplashImageDetails: currentlyDisplayedUnsplashImageDetailsList?[index] ?? UnsplashImageDetails())
     }
 }
 
 extension ImageListScreenPresenter: InteractorToPresenterImageListScreenProtocol {
     func onImagesFetched(unsplashImageDetailsList: [UnsplashImageDetails], linkHeaderValue: String?) {
-        if (linkHeaderValue != nil) && (!(linkHeaderValue?.isEmpty ?? true)) {
-            totalCountOfPages = extractTotalNumberOfPages(fromLinkHeader: linkHeaderValue ?? "")
+        if let headerValue = linkHeaderValue, !headerValue.isEmpty, totalCountOfPages == 1 {
+            totalCountOfPages = extractTotalNumberOfPages(fromLinkHeader: headerValue)
         }
         self.currentlyDisplayedUnsplashImageDetailsList?.append(contentsOf: unsplashImageDetailsList)
         view?.showImages()
@@ -58,6 +53,11 @@ extension ImageListScreenPresenter: InteractorToPresenterImageListScreenProtocol
         view?.showError()
     }
     
+    /**
+     The value of the link Header when page = 1 will be something similar to -
+     "<https://api.unsplash.com/photos?client_id=M-Lth7YaKIHrNgJuY4lrL7RA8AfVopTqSjl3510-CEQ&page=22125&per_page=10>; rel=\"last\", <https://api.unsplash.com/photos?client_id=M-Lth7YaKIHrNgJuY4lrL7RA8AfVopTqSjl3510-CEQ&page=2&per_page=10>; rel=\"next\""
+     We have to extract 22125 (total number of pages) from this.
+     */
     private func extractTotalNumberOfPages(fromLinkHeader linkHeader: String) -> Int {
         var extractedValue = 1
         if let range = linkHeader.range(of: "&page="), let range2 = linkHeader.range(of: "&per_page=") {

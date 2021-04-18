@@ -160,3 +160,19 @@ private extension String {
         return self[start..<end]
     }
 }
+
+extension UIViewController {
+    /// An extension of `UIViewController` which can be used to display an alert.
+    /// - Parameters:
+    ///   - title: A `String` denoting the title of the alert.
+    ///   - message: A `String` deenoting the message of the alert.
+    func showAlert(withTitle title: String, withMessage message:String) {
+        let alert = UIAlertController(title: title, message: message, preferredStyle: .alert)
+        let ok = UIAlertAction(title: "OK", style: .default, handler: { action in
+        })
+        alert.addAction(ok)
+        DispatchQueue.main.async(execute: {
+            self.present(alert, animated: true)
+        })
+    }
+}

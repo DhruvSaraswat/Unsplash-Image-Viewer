@@ -26,12 +26,10 @@ class ImageListScreenRouter: PresenterToRouterImageListScreenProtocol {
         return navigationController
     }
     
-    func pushToDetailsScreen(withBlurHash blurHash: String,
-                             withURL fullImageURL: String,
-                             withLocation location: String,
-                             withImageDescription imageDescriptionn: String,
-                             withProfileImageURL profileImageURL: String,
-                             withUserName name: String) {
-        
+    func pushToDetailsScreen(fromScreen view: PresenterToViewImageListScreenProtocol, withUnsplashImageDetails unsplashImageDetails: UnsplashImageDetails) {
+        let imageDetailsScreenViewController = ImageDetailsScreenViewController(nibName: "ImageDetailsScreenViewController", bundle: nil)
+        imageDetailsScreenViewController.unsplashImageDetails = unsplashImageDetails
+        let viewController = view as! ImageListScreenViewController
+        viewController.navigationController?.pushViewController(imageDetailsScreenViewController, animated: true)
     }
 }

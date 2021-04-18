@@ -62,7 +62,7 @@ class NetworkLayerTests: XCTestCase {
             return (response, data)
         }
         
-        networkLayer.loadRandomImages(withPage: 1, resultsPerPage: 15) { (result) in
+        networkLayer.loadRandomImages(withPage: 1, resultsPerPage: 15) { (result, linkHeaderValue) in
             switch result {
             case .success(_):
                 XCTFail("Success was not expected, because the clientID is empty.")
@@ -111,7 +111,7 @@ class NetworkLayerTests: XCTestCase {
             return (response, data)
         }
         
-        networkLayer.loadRandomImages(withPage: 1, resultsPerPage: 15) { (result) in
+        networkLayer.loadRandomImages(withPage: 1, resultsPerPage: 15) { (result, linkHeaderValue) in
             switch result {
             case .success(_):
                 XCTFail("Success was not expected, because the JSON response is invalid.")
@@ -160,7 +160,7 @@ class NetworkLayerTests: XCTestCase {
             return (response, data)
         }
         
-        networkLayer.loadRandomImages(withPage: 1, resultsPerPage: 15) { (result) in
+        networkLayer.loadRandomImages(withPage: 1, resultsPerPage: 15) { (result, linkHeaderValue) in
             switch result {
             case .success(_):
                 XCTFail("Success was not expected, because the response code is not 200.")
@@ -207,7 +207,7 @@ class NetworkLayerTests: XCTestCase {
             return (response, data)
         }
         
-        networkLayer.loadRandomImages(withPage: 1, resultsPerPage: 15) { (result) in
+        networkLayer.loadRandomImages(withPage: 1, resultsPerPage: 15) { (result, linkHeaderValue) in
             switch result {
             case .success(let unsplashImageDetailsList):
                 XCTAssertEqual(unsplashImageDetailsList.count, 1, "There should be only 1 item in the response array.")

@@ -30,19 +30,40 @@ protocol NetworkLayerProtocol {
     ///   - resultsPerPage: An `Int` denoting the results per page to be fetched. Maximum value is 30 and default value is 10. Refer the [Pagination section in Unsplash API Documentation](https://unsplash.com/documentation#pagination).
     ///   - completion: A trailing closure which gets called with the `Result` of the [List Photos Unsplash API](https://unsplash.com/documentation#list-photos) call.
     func loadRandomImages(withPage page: Int, resultsPerPage: Int, completion: @escaping (Result<[UnsplashImageDetails], Error>, String?) -> Void)
+    
+    
+    /// This method fetches an image from a `URL`, and then calls the optional completion handler with the resulting `UIImage`.
+    ///
+    /// Internally, this method first checks if the image from that URL is already stored in the cache, and only if it is not stored in the cache, it performs the HTTP(S) request, stores the image in cache and then calls the completion handler.
+    /// - Parameters:
+    ///   - url: A `URL` denonting the URL from which the image has to be loaded.
+    ///   - completion: An optional trailing closure which gets called with the resulting `UIImage`.
+    func loadImage(from url: URL, completion: ((_ loadedImage: UIImage?) -> Void)?)
+    
+    
+    /// This method cancels a download task for the given URL, if it exists.
+    /// - Parameter url: The `URL` whose download task has to be cancelled.
+    func cancelDownload(for url: URL)
 }
 
 class NetworkLayer: NetworkLayerProtocol {
     
     let urlSession: URLSession
     let clientID: String
+    public static let sharedInstance = NetworkLayer()
+    private let imageCache: ImageCache
+    private var tasks = [URL: URLSessionDataTask]()
     
     /// Create an instance of `NetworkLayer` to carry out API calls and Network requests.
     /// - Parameter urlSession: A `URLSession` object. Default value is `URLSession.shared`.
     /// - Parameter clientID: A `String` containing the value of the clientID.
-    init(urlSession: URLSession = URLSession.shared, clientID: String = AppConfig.sharedInstance.getUnsplashAPIKey()) {
+    /// - Parameter imageCache: An `ImageCache` object. Default value is `ImageCache.sharedInstance`.
+    init(urlSession: URLSession = URLSession.shared,
+         clientID: String = AppConfig.sharedInstance.getUnsplashAPIKey(),
+         imageCache: ImageCache = ImageCache.sharedInstance) {
         self.urlSession = urlSession
         self.clientID = clientID
+        self.imageCache = imageCache
     }
     
     func loadRandomImages(withPage page: Int = 1, resultsPerPage: Int = 10,
@@ -75,5 +96,47 @@ class NetworkLayer: NetworkLayerProtocol {
                 return
             }
         }.resume()
+    }
+    
+    func loadImage(from url: URL, completion: ((UIImage?) -> Void)? = nil) {
+        if let imageFromCache = self.imageCache.retrieveImage(for: url) {
+            if let completion = completion {
+                self.tasks.removeValue(forKey: url)
+                completion(imageFromCache)
+            }
+            return
+        }
+        
+        let task = self.urlSession.dataTask(with: url) { (data, response, error) in
+            guard
+                let data = data,
+                let loadedImage = UIImage(data: data)
+            else {
+                print("Counldn't load image from url = \(url)")
+                if let completion = completion {
+                    self.tasks.removeValue(forKey: url)
+                    completion(nil)
+                }
+                return
+            }
+            
+            self.imageCache.storeImage(image: loadedImage, for: url)
+            
+            DispatchQueue.main.async {
+                if let completion = completion {
+                    self.tasks.removeValue(forKey: url)
+                    completion(loadedImage)
+                }
+            }
+        }
+        tasks[url] = task
+        task.resume()
+    }
+    
+    func cancelDownload(for url: URL) {
+        if let downloadTask = tasks[url] {
+            downloadTask.cancel()
+            self.tasks.removeValue(forKey: url)
+        }
     }
 }
