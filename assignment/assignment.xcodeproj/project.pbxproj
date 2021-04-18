@@ -59,9 +59,6 @@
 		32748929261C2252000E2559 /* ImageListScreenCollectionViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 32748927261C2252000E2559 /* ImageListScreenCollectionViewCell.xib */; };
 		3274893C261C3D08000E2559 /* ImageListScreenPresenterTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3274893B261C3D08000E2559 /* ImageListScreenPresenterTests.swift */; };
 		32748972261CAF36000E2559 /* ImageListScreenInteractorTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 32748971261CAF36000E2559 /* ImageListScreenInteractorTests.swift */; };
-		32C9BDD8262168F600010103 /* response.json in Resources */ = {isa = PBXBuildFile; fileRef = 32C9BDD7262168F600010103 /* response.json */; };
-		32C9BDDD26216CC600010103 /* response_page2.json in Resources */ = {isa = PBXBuildFile; fileRef = 32C9BDDC26216CC600010103 /* response_page2.json */; };
-		32C9BDE226216DCD00010103 /* response_page3.json in Resources */ = {isa = PBXBuildFile; fileRef = 32C9BDE126216DCD00010103 /* response_page3.json */; };
 		32CC54E4261E66E500963D76 /* LoadingIndicatorView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 32CC54E2261E66E500963D76 /* LoadingIndicatorView.swift */; };
 		32CC54E5261E66E500963D76 /* LoadingIndicatorView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 32CC54E3261E66E500963D76 /* LoadingIndicatorView.xib */; };
 /* End PBXBuildFile section */
@@ -142,9 +139,6 @@
 		32748927261C2252000E2559 /* ImageListScreenCollectionViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ImageListScreenCollectionViewCell.xib; sourceTree = "<group>"; };
 		3274893B261C3D08000E2559 /* ImageListScreenPresenterTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageListScreenPresenterTests.swift; sourceTree = "<group>"; };
 		32748971261CAF36000E2559 /* ImageListScreenInteractorTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageListScreenInteractorTests.swift; sourceTree = "<group>"; };
-		32C9BDD7262168F600010103 /* response.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = response.json; sourceTree = "<group>"; };
-		32C9BDDC26216CC600010103 /* response_page2.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = response_page2.json; sourceTree = "<group>"; };
-		32C9BDE126216DCD00010103 /* response_page3.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = response_page3.json; sourceTree = "<group>"; };
 		32CC54E2261E66E500963D76 /* LoadingIndicatorView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoadingIndicatorView.swift; sourceTree = "<group>"; };
 		32CC54E3261E66E500963D76 /* LoadingIndicatorView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = LoadingIndicatorView.xib; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -379,9 +373,6 @@
 			isa = PBXGroup;
 			children = (
 				327488DC261BAE6B000E2559 /* ImageListScreenInteractor.swift */,
-				32C9BDD7262168F600010103 /* response.json */,
-				32C9BDDC26216CC600010103 /* response_page2.json */,
-				32C9BDE126216DCD00010103 /* response_page3.json */,
 			);
 			path = Interactor;
 			sourceTree = "<group>";
@@ -559,7 +550,6 @@
 				32748802261A3030000E2559 /* Roboto-BoldItalic.ttf in Resources */,
 				32748929261C2252000E2559 /* ImageListScreenCollectionViewCell.xib in Resources */,
 				32190EAC262CABC500AECBA4 /* End_Of_List_Demo.gif in Resources */,
-				32C9BDDD26216CC600010103 /* response_page2.json in Resources */,
 				327487BF261A2090000E2559 /* LaunchScreen.storyboard in Resources */,
 				32748803261A3030000E2559 /* Roboto-Bold.ttf in Resources */,
 				32748807261A3030000E2559 /* RobotoCondensed-Italic.ttf in Resources */,
@@ -573,7 +563,6 @@
 				32748804261A3030000E2559 /* Roboto-Thin.ttf in Resources */,
 				3274880D261A3030000E2559 /* RobotoCondensed-BoldItalic.ttf in Resources */,
 				32190EB1262CAFFA00AECBA4 /* Swipe_to_Refresh_Demo.gif in Resources */,
-				32C9BDD8262168F600010103 /* response.json in Resources */,
 				32748909261BBFA1000E2559 /* ImageListScreenViewController.xib in Resources */,
 				327487FF261A3030000E2559 /* Roboto-LightItalic.ttf in Resources */,
 				32748806261A3030000E2559 /* Roboto-BlackItalic.ttf in Resources */,
@@ -584,7 +573,6 @@
 				32748800261A3030000E2559 /* Roboto-Light.ttf in Resources */,
 				3274880C261A3030000E2559 /* Roboto-ThinItalic.ttf in Resources */,
 				327487FD261A3030000E2559 /* Roboto-Regular.ttf in Resources */,
-				32C9BDE226216DCD00010103 /* response_page3.json in Resources */,
 				32CC54E5261E66E500963D76 /* LoadingIndicatorView.xib in Resources */,
 				32190EBE262CBAAF00AECBA4 /* Image_List_Error.gif in Resources */,
 			);

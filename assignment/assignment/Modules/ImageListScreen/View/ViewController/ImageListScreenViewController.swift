@@ -146,7 +146,7 @@ extension ImageListScreenViewController: UICollectionViewDataSource, UICollectio
     }
     
     func collectionView(_ collectionView: UICollectionView, willDisplay cell: UICollectionViewCell, forItemAt indexPath: IndexPath) {
-        if (currentPage ?? 1) < 4 {
+        if (currentPage ?? 1) < (presenter?.totalCountOfPages ?? 1) {
             if (indexPath.row >= ((presenter?.currentCountOfUnsplashImageDetailsFetched ?? 1) - 2)) && (!self.isLoading) {
                 // Load new page data.
                 self.isLoading = true
