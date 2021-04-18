@@ -20,7 +20,7 @@ This repository contains the source code for the iOS app assignment given by Hap
 
 # Notes for Each Screen
 ## Splash Screen
-The Launch.storyboard file is used to setup the launch screen of the app.
+The <a href="https://github.com/DhruvSaraswat/hapramp-assignment/blob/main/assignment/assignment/Base.lproj/LaunchScreen.storyboard">LaunchScreen.storyboard</a> file is used to setup the launch screen of the app.
 
 ## Image List Screen
 <ul>
