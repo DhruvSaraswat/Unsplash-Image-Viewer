@@ -11,6 +11,8 @@ This repository contains the source code for the iOS app assignment given by Hap
 2. Open the <a href="https://github.com/DhruvSaraswat/hapramp-assignment/tree/main/assignment/assignment.xcodeproj">assignment.xcodeproj</a> file in <a href="https://developer.apple.com/xcode/ide/">Xcode IDE</a>.
 3. Click on the "Play" button on the top-left-hand-corner of Xcode.
 
+To run all the unit tests, press Command ⌘ + control ⌃ + U.
+
 # In-app Navigation
 1. The user opens the application and sees the splash screen.
 2. Then they go to the image listing view which is infinitely scrollable using pagination.
@@ -70,7 +72,7 @@ When the user clicks on any iamge in the Image List screen, they would be led to
 # Miscellaneous Notes
 <ul>
   <li>VIPER architecture is used in this assignment, to make unit testing easier, and to follow SOLID principles.</li><br>
-  <li>All the unit tests are inside the asignment-tests folder.</li><br>
+  <li>All the unit tests are inside the <a href="https://github.com/DhruvSaraswat/hapramp-assignment/tree/main/assignment/assignmentTests">assignmentTests</a> folder.</li><br>
   <li>There are no UI tests in this assignment, since testing the UI would involve hitting the Unsplash APIs in the Image List screen, which would count against the <a href="https://unsplash.com/documentation#rate-limiting">quota of 50 API requests per hour set by Unsplash</a>.
     A better way to write UI Tests would be to use a tool like <a href="http://wiremock.org/">WireMock</a> to store and mock all the Unsplash PI responses in a local server, and then hit that local server (instead of the actual Unsplash APIs) while running UI tests. However, this is a time-consuming activity.</li><br>
   <li>Both the regular sized and full sized images are loaded asynchronously and cached to improve app performance, so that the actual images have to be fetched over the network only once.</li><br>
