@@ -8,7 +8,8 @@ This repository contains the source code for the iOS app assignment given by Hap
 
 # Get Started
 1. Clone this repository.
-2. Open the 
+2. Open the <a href="https://github.com/DhruvSaraswat/hapramp-assignment/tree/main/assignment/assignment.xcodeproj">assignment.xcodeproj</a> file in <a href="https://developer.apple.com/xcode/ide/">Xcode IDE</a>.
+3. Click on the "Play" button on the top-left-hand-corner of Xcode.
 
 # In-app Navigation
 1. The user opens the application and sees the splash screen.
@@ -66,7 +67,7 @@ When the user clicks on any iamge in the Image List screen, they would be led to
 </ul>
 
 
-# Technical Notes
+# Miscellaneous Notes
 <ul>
   <li>VIPER architecture is used in this assignment, to make unit testing easier, and to follow SOLID principles.</li><br>
   <li>All the unit tests are inside the asignment-tests folder.</li><br>
