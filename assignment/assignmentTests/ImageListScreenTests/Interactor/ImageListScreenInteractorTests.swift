@@ -43,7 +43,18 @@ class ImageListScreenInteractorTests: XCTestCase {
     
     func testLoadImage() throws {
         let url = URL(string: "https://example.com")
-        interactor.networkLayer?.loadImage(from: url!, completion: nil)
+        networkLayerMock.loadImage(from: url!, completion: nil)
+        XCTAssertTrue(networkLayerMock.isLoadImageMethodCalled, "The loadImage() method should be called.")
+        XCTAssertFalse(networkLayerMock.isCancelDownloadMethodCalled, "The cancelDownload() method should not be called.")
+        XCTAssertFalse(presenter.isOnImagesFetchErrorMethodCalled, "The onImagesFetchError() presenter method should not be called.")
+        XCTAssertFalse(presenter.isOnImagesFetchedMethodCalled, "The onImagesFetched() presenter method should not be called.")
+    }
+    
+    func testCancelDownload() throws {
+        let url = URL(string: "https://exampleforcancelurl.com")
+        networkLayerMock.cancelDownload(for: url!)
+        XCTAssertTrue(networkLayerMock.isCancelDownloadMethodCalled, "The cancelDownload() method should be called.")
+        XCTAssertFalse(networkLayerMock.isLoadImageMethodCalled, "The loadImage() method should not be called.")
         XCTAssertFalse(presenter.isOnImagesFetchErrorMethodCalled, "The onImagesFetchError() presenter method should not be called.")
         XCTAssertFalse(presenter.isOnImagesFetchedMethodCalled, "The onImagesFetched() presenter method should not be called.")
     }
@@ -85,6 +96,8 @@ class ImageListScreenInteractorMockWithInit: XCTestCase, PresenterToInteractorIm
 
 fileprivate class NetworkLayerMock: NetworkLayerProtocol {
     var isLoadRandomImagesAPICallSuccessful = false
+    var isLoadImageMethodCalled = false
+    var isCancelDownloadMethodCalled = false
     
     func loadRandomImages(withPage page: Int,
                           resultsPerPage: Int,
@@ -101,7 +114,14 @@ fileprivate class NetworkLayerMock: NetworkLayerProtocol {
     }
     
     func loadImage(from url: URL, completion: ((UIImage?) -> Void)?) {
+        isLoadImageMethodCalled = true
         let expectedURL = URL(string: "https://example.com")
+        XCTAssertEqual(expectedURL, url, "The URL should be \(url).")
+    }
+    
+    func cancelDownload(for url: URL) {
+        isCancelDownloadMethodCalled = true
+        let expectedURL = URL(string: "https://exampleforcancelurl.com")
         XCTAssertEqual(expectedURL, url, "The URL should be \(url).")
     }
     

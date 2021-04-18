@@ -39,6 +39,11 @@ protocol NetworkLayerProtocol {
     ///   - url: A `URL` denonting the URL from which the image has to be loaded.
     ///   - completion: An optional trailing closure which gets called with the resulting `UIImage`.
     func loadImage(from url: URL, completion: ((_ loadedImage: UIImage?) -> Void)?)
+    
+    
+    /// This method cancels a download task for the given URL, if it exists.
+    /// - Parameter url: The `URL` whose download task has to be cancelled.
+    func cancelDownload(for url: URL)
 }
 
 class NetworkLayer: NetworkLayerProtocol {
@@ -47,6 +52,7 @@ class NetworkLayer: NetworkLayerProtocol {
     let clientID: String
     public static let sharedInstance = NetworkLayer()
     private let imageCache: ImageCache
+    private var tasks = [URL: URLSessionDataTask]()
     
     /// Create an instance of `NetworkLayer` to carry out API calls and Network requests.
     /// - Parameter urlSession: A `URLSession` object. Default value is `URLSession.shared`.
@@ -95,18 +101,20 @@ class NetworkLayer: NetworkLayerProtocol {
     func loadImage(from url: URL, completion: ((UIImage?) -> Void)? = nil) {
         if let imageFromCache = self.imageCache.retrieveImage(for: url) {
             if let completion = completion {
+                self.tasks.removeValue(forKey: url)
                 completion(imageFromCache)
             }
             return
         }
         
-        self.urlSession.dataTask(with: url) { (data, response, error) in
+        let task = self.urlSession.dataTask(with: url) { (data, response, error) in
             guard
                 let data = data,
                 let loadedImage = UIImage(data: data)
             else {
                 print("Counldn't load image from url = \(url)")
                 if let completion = completion {
+                    self.tasks.removeValue(forKey: url)
                     completion(nil)
                 }
                 return
@@ -116,9 +124,19 @@ class NetworkLayer: NetworkLayerProtocol {
             
             DispatchQueue.main.async {
                 if let completion = completion {
+                    self.tasks.removeValue(forKey: url)
                     completion(loadedImage)
                 }
             }
-        }.resume()
+        }
+        tasks[url] = task
+        task.resume()
+    }
+    
+    func cancelDownload(for url: URL) {
+        if let downloadTask = tasks[url] {
+            downloadTask.cancel()
+            self.tasks.removeValue(forKey: url)
+        }
     }
 }

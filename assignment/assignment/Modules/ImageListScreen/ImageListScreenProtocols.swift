@@ -51,18 +51,10 @@ protocol PresenterToRouterImageListScreenProtocol: class {
     
     /// This method pushes the user to the Details Screen, where the entire image is loaded, and other relevant details are also displayed.
     /// - Parameters:
-    ///   - blurHash: A `String` representing the blurHash of the image. This will be used to show the placeholder of the image, while the full raw image is being fetched in the background.
-    ///   - fullImageURL: A `String` representing the URL of the full image with its maximum dimensions ( as opposed to regular, small or thummnail image URLs ).
-    ///   - location: A `String` representing the location.
-    ///   - imageDescriptionn: A `String` representing the description of the image.
-    ///   - profileImageURL: A `String` representing the user's profile image URL.
-    ///   - name: A `String` representing the name ( or the Unsplash username ) of the user.
-    func pushToDetailsScreen(withBlurHash blurHash: String,
-                             withURL fullImageURL: String,
-                             withLocation location: String,
-                             withImageDescription imageDescriptionn: String,
-                             withProfileImageURL profileImageURL: String,
-                             withUserName name: String)
+    ///   - view: The view on which the Image Details screen has to be pushed.
+    ///   - unsplashImageDetails: An `UnsplashImageDetails` object.
+    func pushToDetailsScreen(fromScreen view: PresenterToViewImageListScreenProtocol,
+                             withUnsplashImageDetails unsplashImageDetails: UnsplashImageDetails)
 }
 
 protocol PresenterToInteractorImageListScreenProtocol: class {
@@ -76,6 +68,7 @@ protocol PresenterToInteractorImageListScreenProtocol: class {
 protocol InteractorToPresenterImageListScreenProtocol: class {
     /// This method is used to return the list of `UnsplashImageDetails` to the presenter.
     /// - Parameter unsplashImageDetailsList: An array of `UnsplashImageDetails`.
+    /// - Parameter linkHeaderValue: An optional `String` denoting the value of the "link" response header.
     func onImagesFetched(unsplashImageDetailsList: [UnsplashImageDetails], linkHeaderValue: String?)
     
     

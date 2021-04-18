@@ -36,15 +36,7 @@ class ImageListScreenPresenter: ViewToPresenterImageListScreenProtocol {
     }
     
     func pushToImageDetailsScreen(selectedCellIndex index: Int) {
-        let location = currentlyDisplayedUnsplashImageDetailsList?[index].user?.location ?? "Location not available"
-        let imageDescription = currentlyDisplayedUnsplashImageDetailsList?[index].description ?? currentlyDisplayedUnsplashImageDetailsList?[index].alt_description ?? "Image description not available"
-        let userName = currentlyDisplayedUnsplashImageDetailsList?[index].user?.name ?? currentlyDisplayedUnsplashImageDetailsList?[index].user?.username ?? "Name not available"
-        router?.pushToDetailsScreen(withBlurHash: currentlyDisplayedUnsplashImageDetailsList?[index].blur_hash ?? "",
-                                    withURL: currentlyDisplayedUnsplashImageDetailsList?[index].urls?.full ?? "",
-                                    withLocation: location,
-                                    withImageDescription: imageDescription,
-                                    withProfileImageURL: currentlyDisplayedUnsplashImageDetailsList?[index].user?.profile_image?.small ?? "",
-                                    withUserName: userName)
+        router?.pushToDetailsScreen(fromScreen: view!, withUnsplashImageDetails: currentlyDisplayedUnsplashImageDetailsList?[index] ?? UnsplashImageDetails())
     }
 }
 
