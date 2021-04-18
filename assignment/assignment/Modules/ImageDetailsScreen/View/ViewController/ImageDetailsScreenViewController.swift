@@ -35,6 +35,7 @@ class ImageDetailsScreenViewController: UIViewController {
     override func viewWillLayoutSubviews() {
         super.viewWillLayoutSubviews()
         
+        imageView.contentMode = .scaleAspectFill
         userProfileImageView.clipsToBounds = true
         userProfileImageView.contentMode = .scaleAspectFill
         userProfileImageView.layer.cornerRadius = userProfileImageView.frame.size.width / 2
