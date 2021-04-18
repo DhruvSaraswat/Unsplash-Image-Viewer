@@ -25,7 +25,7 @@ The Launch.storyboard file is used to setup the launch screen of the app.
 ## Image List Screen
 <ul>
   <li>This screen shows random images fetched from the <a href="https://unsplash.com/documentation#get-a-random-photo">Get Random Photos Unsplash API</a>. This API returns 5 URLs (raw, full, regular, small and thumb) for each image along with a <a href="https://github.com/woltapp/blurhash">blurHash</a> string. The regular sized image is shown in the Image List screen.</li><br>
-  <li>The images are fetched page-by-page as the user scrolls downwards, and displayed in an infinite scroll. The page sized used in this app is 15, which can be changed anytime.</li><br>
+  <li>The images are fetched page-by-page as the user scrolls downwards, and displayed in an infinite scroll. The page sized used in this app is 10.</li><br>
   <li>A <a href="https://developer.apple.com/documentation/uikit/uicollectionview">UICollectionView</a> is used to display the images.</li><br>
   <li>The first image in the screen is covered by a dark overlay, and the "DOSPLASH" label text is shown on top of it.</li><br>
   <li>Clicking on any image will take the user to the Image Details screen, where the full-sized image will be displayed.</li><br>
@@ -72,7 +72,7 @@ When the user clicks on any iamge in the Image List screen, they would be led to
   <li>VIPER architecture is used in this assignment, to make unit testing easier, and to follow SOLID principles.</li><br>
   <li>All the unit tests are inside the asignment-tests folder.</li><br>
   <li>There are no UI tests in this assignment, since testing the UI would involve hitting the Unsplash APIs in the Image List screen, which would count against the <a href="https://unsplash.com/documentation#rate-limiting">quota of 50 API requests per hour set by Unsplash</a>.
-    A better way to write UI Tests would be to use a tool like <a href="http://wiremock.org/">WireMock</a> to store and mock all the Unsplash PI responses in a local server, and then hit that local server (instead of the actual Unsplash APIs) while running UI tests. However, this is time-consuming (not an assumption) and out-of-scope of this assignment (I assumed).</li><br>
+    A better way to write UI Tests would be to use a tool like <a href="http://wiremock.org/">WireMock</a> to store and mock all the Unsplash PI responses in a local server, and then hit that local server (instead of the actual Unsplash APIs) while running UI tests. However, this is a time-consuming activity.</li><br>
   <li>Both the regular sized and full sized images are loaded asynchronously and cached to improve app performance, so that the actual images have to be fetched over the network only once.</li><br>
   <li>This app works in both Portrait and Landscape modes.</li>
 </ul>
