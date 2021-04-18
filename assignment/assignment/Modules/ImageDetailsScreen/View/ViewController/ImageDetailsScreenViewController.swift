@@ -96,7 +96,6 @@ class ImageDetailsScreenViewController: UIViewController {
         }
         
         if let fullImageURL = URL(string: unsplashImageDetails?.urls?.full ?? "") {
-            print("FULL IMAGE URL = \(fullImageURL)")
             NetworkLayer.sharedInstance.loadImage(from: fullImageURL) { (loadedImage) in
                 guard let image = loadedImage else { return }
                 DispatchQueue.main.async {
