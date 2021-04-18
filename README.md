@@ -68,8 +68,16 @@ When the user clicks on any iamge in the Image List screen, they would be led to
 
 # Technical Notes
 <ul>
-<li>VIPER architecture is used in this assignment, to make unit testing easier, and to follow SOLID principles.</li><br>
-<li>All the unit tests are inside the asignment-tests folder.</li><br>
-<li>There are no UI tests in this assignment, since testing the UI would involve hitting the Unsplash APIs in the Image List screen, which would count against the <a href="https://unsplash.com/documentation#rate-limiting">quota of 50 API requests per hour set by Unsplash</a>. A better way to write UI Tests would be to use a tool like <a href="http://wiremock.org/">WireMock</a> to store and mock all the Unsplash PI responses in a local server, and then hit that local server (instead of the actual Unsplash APIs) while running UI tests. However, this is time-consuming (not an assumption) and out-of-scope of this assignment (I assumed).</li><br>
-<li>Both the regular sized and full sized images are loaded asynchronously and cached to improve app performance, so that the actual images have to be fetched over the network only once.</li><br>
+  <li>VIPER architecture is used in this assignment, to make unit testing easier, and to follow SOLID principles.</li><br>
+  <li>All the unit tests are inside the asignment-tests folder.</li><br>
+  <li>There are no UI tests in this assignment, since testing the UI would involve hitting the Unsplash APIs in the Image List screen, which would count against the <a href="https://unsplash.com/documentation#rate-limiting">quota of 50 API requests per hour set by Unsplash</a>.
+    A better way to write UI Tests would be to use a tool like <a href="http://wiremock.org/">WireMock</a> to store and mock all the Unsplash PI responses in a local server, and then hit that local server (instead of the actual Unsplash APIs) while running UI tests. However, this is time-consuming (not an assumption) and out-of-scope of this assignment (I assumed).</li><br>
+  <li>Both the regular sized and full sized images are loaded asynchronously and cached to improve app performance, so that the actual images have to be fetched over the network only once.</li><br>
+  <li>This app works in both Portrait and Landscape modes.</li>
+</ul>
+<p align="center">
+  <img src="https://github.com/DhruvSaraswat/hapramp-assignment/blob/develop/assignment/assignment/Resources/README_Static_Resources/Landscape_Mode_Demo.gif">
+</p>
+<ul>
+  <li>This app supports iOS 13.0 and above.</li>
 </ul>
