@@ -14,6 +14,7 @@
 		32190EA4262C8F6500AECBA4 /* Initial_GIF.gif in Resources */ = {isa = PBXBuildFile; fileRef = 32190EA3262C8F6500AECBA4 /* Initial_GIF.gif */; };
 		32190EAC262CABC500AECBA4 /* End_Of_List_Demo.gif in Resources */ = {isa = PBXBuildFile; fileRef = 32190EAB262CABC500AECBA4 /* End_Of_List_Demo.gif */; };
 		32190EB1262CAFFA00AECBA4 /* Swipe_to_Refresh_Demo.gif in Resources */ = {isa = PBXBuildFile; fileRef = 32190EB0262CAFFA00AECBA4 /* Swipe_to_Refresh_Demo.gif */; };
+		32190EB6262CB4EF00AECBA4 /* Image_List_Error_Scenario.mov in Resources */ = {isa = PBXBuildFile; fileRef = 32190EB5262CB4EF00AECBA4 /* Image_List_Error_Scenario.mov */; };
 		327487B3261A208F000E2559 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 327487B2261A208F000E2559 /* AppDelegate.swift */; };
 		327487B5261A208F000E2559 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 327487B4261A208F000E2559 /* SceneDelegate.swift */; };
 		327487BC261A2090000E2559 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 327487BB261A2090000E2559 /* Assets.xcassets */; };
@@ -89,6 +90,7 @@
 		32190EA3262C8F6500AECBA4 /* Initial_GIF.gif */ = {isa = PBXFileReference; lastKnownFileType = image.gif; path = Initial_GIF.gif; sourceTree = "<group>"; };
 		32190EAB262CABC500AECBA4 /* End_Of_List_Demo.gif */ = {isa = PBXFileReference; lastKnownFileType = image.gif; path = End_Of_List_Demo.gif; sourceTree = "<group>"; };
 		32190EB0262CAFFA00AECBA4 /* Swipe_to_Refresh_Demo.gif */ = {isa = PBXFileReference; lastKnownFileType = image.gif; path = Swipe_to_Refresh_Demo.gif; sourceTree = "<group>"; };
+		32190EB5262CB4EF00AECBA4 /* Image_List_Error_Scenario.mov */ = {isa = PBXFileReference; lastKnownFileType = video.quicktime; path = Image_List_Error_Scenario.mov; sourceTree = "<group>"; };
 		327487AF261A208F000E2559 /* assignment.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = assignment.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		327487B2261A208F000E2559 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		327487B4261A208F000E2559 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -206,6 +208,7 @@
 		32190EA2262C8F4300AECBA4 /* README_Static_Resources */ = {
 			isa = PBXGroup;
 			children = (
+				32190EB5262CB4EF00AECBA4 /* Image_List_Error_Scenario.mov */,
 				32190EB0262CAFFA00AECBA4 /* Swipe_to_Refresh_Demo.gif */,
 				32190EAB262CABC500AECBA4 /* End_Of_List_Demo.gif */,
 				32190EA3262C8F6500AECBA4 /* Initial_GIF.gif */,
@@ -571,6 +574,7 @@
 				327487FF261A3030000E2559 /* Roboto-LightItalic.ttf in Resources */,
 				32748806261A3030000E2559 /* Roboto-BlackItalic.ttf in Resources */,
 				32748805261A3030000E2559 /* RobotoCondensed-Bold.ttf in Resources */,
+				32190EB6262CB4EF00AECBA4 /* Image_List_Error_Scenario.mov in Resources */,
 				327487FE261A3030000E2559 /* Roboto-Black.ttf in Resources */,
 				32748801261A3030000E2559 /* Roboto-MediumItalic.ttf in Resources */,
 				3274891A261BC8EB000E2559 /* CustomNavigationBar.xib in Resources */,
