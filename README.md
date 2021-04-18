@@ -1,7 +1,9 @@
 # hapramp-assignment
 This repository contains the source code for the iOS app assignment given by Hapramp as part of their hiring process.
 
-![Demo](https://github.com/DhruvSaraswat/hapramp-assignment/blob/develop/assignment/assignment/Resources/README_Static_Resources/Initial_GIF.gif)
+<p align="center">
+  <img src="https://github.com/DhruvSaraswat/hapramp-assignment/blob/develop/assignment/assignment/Resources/README_Static_Resources/Initial_GIF.gif">
+</p>
 
 # Get Started
 1. Clone this repository.
@@ -20,17 +22,23 @@ The Launch.storyboard file is used to setup the launch screen of the app.
 
 ## Image List Screen
 <ul>
-<li>This screen shows random images fetched from the <a href="https://unsplash.com/documentation#get-a-random-photo">Get Random Photos Unsplash API</a>. This API returns 5 URLs (raw, full, regular, small and thumb) for each image along with a <a href="https://github.com/woltapp/blurhash">blurHash</a> string. The regular sized image is shown in the Image List screen.</li><br>
-<li>The images are fetched page-by-page as the user scrolls downwards, and displayed in an infinite scroll. The page sized used in this app is 15, which can be changed anytime.</li><br>
-<li>A <a href="https://developer.apple.com/documentation/uikit/uicollectionview">UICollectionView</a> is used to display the images.</li><br>
-<li>The first image in the screen is covered by a dark overlay, and the "DOSPLASH" label text is shown on top of it.</li><br>
-<li>Clicking on any image will take the user to the Image Details screen, where the full-sized image will be displayed.</li><br>
-<li>If the user swipes to refresh the screen, a new set of images will be fetched, and the page count will be reset to 1.</li><br>
-<li>In case there is any error while fetching an image, an alert will be displayed.</li><br>
-<li>When the user reaches the end of the image list, a label saying "You have reached the end of the list." will be displayed.</li><br>
+  <li>This screen shows random images fetched from the <a href="https://unsplash.com/documentation#get-a-random-photo">Get Random Photos Unsplash API</a>. This API returns 5 URLs (raw, full, regular, small and thumb) for each image along with a <a href="https://github.com/woltapp/blurhash">blurHash</a> string. The regular sized image is shown in the Image List screen.</li><br>
+  <li>The images are fetched page-by-page as the user scrolls downwards, and displayed in an infinite scroll. The page sized used in this app is 15, which can be changed anytime.</li><br>
+  <li>A <a href="https://developer.apple.com/documentation/uikit/uicollectionview">UICollectionView</a> is used to display the images.</li><br>
+  <li>The first image in the screen is covered by a dark overlay, and the "DOSPLASH" label text is shown on top of it.</li><br>
+  <li>Clicking on any image will take the user to the Image Details screen, where the full-sized image will be displayed.</li><br>
+  <li>If / when the user swipes to refresh the screen, a new set of images will be fetched, and the page count will be reset to 1.</li><br>
 </ul>
-
-![End-of-list-demo](https://github.com/DhruvSaraswat/hapramp-assignment/blob/develop/assignment/assignment/Resources/README_Static_Resources/End_Of_List_Demo.gif)
+<p align="center">
+  <img src="https://github.com/DhruvSaraswat/hapramp-assignment/blob/develop/assignment/assignment/Resources/README_Static_Resources/Swipe_to_Refresh_Demo.gif">
+</p>
+<ul>
+  <li>In case there is any error while fetching an image, an alert will be displayed.</li><br>
+  <li>When the user reaches the end of the image list, a label saying "You have reached the end of the list." will be displayed.</li><br>
+</ul>
+<p align="center">
+  <img src="https://github.com/DhruvSaraswat/hapramp-assignment/blob/develop/assignment/assignment/Resources/README_Static_Resources/End_Of_List_Demo.gif">
+</p>
 
 ### Optimizations Done in this Screen
 <ul>
