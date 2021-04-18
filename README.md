@@ -11,6 +11,8 @@ This repository contains the source code for the iOS app assignment given by Hap
 2. Open the <a href="https://github.com/DhruvSaraswat/hapramp-assignment/tree/main/assignment/assignment.xcodeproj">assignment.xcodeproj</a> file in <a href="https://developer.apple.com/xcode/ide/">Xcode IDE</a>.
 3. Click on the "Play" button on the top-left-hand-corner of Xcode.
 
+To run all the unit tests, press Command ⌘ + control ⌃ + U.
+
 # In-app Navigation
 1. The user opens the application and sees the splash screen.
 2. Then they go to the image listing view which is infinitely scrollable using pagination.
