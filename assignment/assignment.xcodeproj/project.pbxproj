@@ -20,7 +20,6 @@
 		327487B5261A208F000E2559 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 327487B4261A208F000E2559 /* SceneDelegate.swift */; };
 		327487BC261A2090000E2559 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 327487BB261A2090000E2559 /* Assets.xcassets */; };
 		327487BF261A2090000E2559 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 327487BD261A2090000E2559 /* LaunchScreen.storyboard */; };
-		327487CA261A2091000E2559 /* assignmentTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 327487C9261A2091000E2559 /* assignmentTests.swift */; };
 		327487D5261A2091000E2559 /* assignmentUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 327487D4261A2091000E2559 /* assignmentUITests.swift */; };
 		327487FD261A3030000E2559 /* Roboto-Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 327487EB261A3030000E2559 /* Roboto-Regular.ttf */; };
 		327487FE261A3030000E2559 /* Roboto-Black.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 327487EC261A3030000E2559 /* Roboto-Black.ttf */; };
@@ -97,7 +96,6 @@
 		327487BE261A2090000E2559 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		327487C0261A2090000E2559 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		327487C5261A2091000E2559 /* assignmentTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = assignmentTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
-		327487C9261A2091000E2559 /* assignmentTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = assignmentTests.swift; sourceTree = "<group>"; };
 		327487CB261A2091000E2559 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		327487D0261A2091000E2559 /* assignmentUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = assignmentUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		327487D4261A2091000E2559 /* assignmentUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = assignmentUITests.swift; sourceTree = "<group>"; };
@@ -254,7 +252,6 @@
 			isa = PBXGroup;
 			children = (
 				32748939261C3C89000E2559 /* ImageListScreenTests */,
-				327487C9261A2091000E2559 /* assignmentTests.swift */,
 				327487CB261A2091000E2559 /* Info.plist */,
 				327488AB261B9981000E2559 /* AppConfigTests.swift */,
 				327488B0261B9F31000E2559 /* NetworkLayerTests.swift */,
@@ -626,7 +623,6 @@
 				32748972261CAF36000E2559 /* ImageListScreenInteractorTests.swift in Sources */,
 				3274893C261C3D08000E2559 /* ImageListScreenPresenterTests.swift in Sources */,
 				327488BF261BA68E000E2559 /* Utility.swift in Sources */,
-				327487CA261A2091000E2559 /* assignmentTests.swift in Sources */,
 				327488AC261B9981000E2559 /* AppConfigTests.swift in Sources */,
 				327488B1261B9F31000E2559 /* NetworkLayerTests.swift in Sources */,
 			);
