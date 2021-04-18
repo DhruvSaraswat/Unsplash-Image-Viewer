@@ -1,4 +1,5 @@
 # hapramp-assignment
+
 This repository contains the source code for the iOS app assignment given by Hapramp as part of their hiring process.
 
 <p align="center">
@@ -34,6 +35,11 @@ The Launch.storyboard file is used to setup the launch screen of the app.
 </p>
 <ul>
   <li>In case there is any error while fetching an image, an alert will be displayed.</li><br>
+</ul>
+<p align="center">
+  <img src="https://github.com/DhruvSaraswat/hapramp-assignment/blob/develop/assignment/assignment/Resources/README_Static_Resources/Image_List_Error.gif">
+</p>
+<ul>
   <li>When the user reaches the end of the image list, a label saying "You have reached the end of the list." will be displayed.</li><br>
 </ul>
 <p align="center">
